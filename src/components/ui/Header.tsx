@@ -5,8 +5,9 @@ import Link from "next/link";
 import { Select } from "../Select";
 
 const Header = () => {
-  const [category, setCategory] = useState("");
+  const [language, setLanguage] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [moneyCountry, setMoneyCountry] = useState<string>('')
 
   const optionsLanguage = [
     { label: "ES", value: "es" },
@@ -14,8 +15,15 @@ const Header = () => {
     { label: "FR", value: "fr" },
   ];
 
+  const optionMoney = [
+    { label: "EUR $", value: "eur" },
+    { label: "CAD $", value: "cad" },
+    { label: "US $", value: "us" },
+    { label: "COP $", value: "cop" },
+  ]
+
   return (
-    <header className="flex items-center justify-between p-6 border-b border-black px-4 md:px-12">
+    <header className="flex items-center justify-between p-6 border-b border-black px-4 md:px-16">
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
         <Image
@@ -32,21 +40,46 @@ const Header = () => {
       <nav className="hidden md:flex items-center gap-14 justify-between">
         <ul className="flex flex-row gap-2">
           <li>
-            <Link href="#" className="hover:border-b-2 border-[#008060]">Compras</Link>
+            <Link href="#" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
+             before:content-[''] before:absolute before:bottom-0 before:left-0 
+             before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
+             before:transition-all before:duration-300 hover:before:h-full 
+             hover:text-white transition-colors duration-300">
+              Compras
+            </Link>
           </li>
           <li>
-            <Link href="#" className="hover:border-b-2 border-[#008060]">Ventas</Link>
+            <Link href="#" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
+             before:content-[''] before:absolute before:bottom-0 before:left-0 
+             before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
+             before:transition-all before:duration-300 hover:before:h-full 
+            hover:text-white transition-colors duration-300">
+              Ventas
+            </Link>
           </li>
           <li>
-            <Link href="#" className="hover:border-b-2 border-[#008060]">Impulsa tus ventas</Link>
+            <Link href="#" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
+             before:content-[''] before:absolute before:bottom-0 before:left-0 
+             before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
+             before:transition-all before:duration-300 hover:before:h-full 
+             hover:text-white transition-colors duration-300">
+              Impulsa tus ventas
+              </Link>
           </li>
         </ul>
 
-        <div className="px-2 py-1">
+        <div className="px-2 py-1 flex flex-row gap-2.5">
           <Select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
             options={optionsLanguage}
+            className="w-20 border-none"
+          />
+
+          <Select 
+            value={moneyCountry}
+            onChange={(e) => setMoneyCountry(e.target.value)}
+            options={optionMoney}
             className="w-20"
           />
         </div>
@@ -72,30 +105,28 @@ const Header = () => {
 
           {/* User */}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-            role="presentation"
-            className="icon icon-account"
-            width="22"
-            height="23"
-            fill="none"
-            viewBox="0 0 22 23"
-          >
-            <path
-              d="M11 14.25C14.0376 14.25 16.5 11.7876 16.5 8.75C16.5 5.71243 14.0376 3.25 11 3.25C7.96243 3.25 5.5 5.71243 5.5 8.75C5.5 11.7876 7.96243 14.25 11 14.25Z"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M2.66406 19.0625C3.50877 17.5991 4.72384 16.3838 6.18712 15.5389C7.65039 14.694 9.31031 14.2492 11 14.2492C12.6897 14.2492 14.3496 14.694 15.8129 15.5389C17.2762 16.3838 18.4912 17.5991 19.3359 19.0625"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+          role="presentation"
+          className="icon icon-account w-6 h-6 text-[#008060] transition-all duration-300 hover:text-[#005f4a] hover:drop-shadow-[0_0_8px_#00c28b]"
+          fill="none"
+          viewBox="0 0 22 23"
+        >
+          <path
+            d="M11 14.25C14.0376 14.25 16.5 11.7876 16.5 8.75C16.5 5.71243 14.0376 3.25 11 3.25C7.96243 3.25 5.5 5.71243 5.5 8.75C5.5 11.7876 7.96243 14.25 11 14.25Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeMiterlimit="10"
+          />
+          <path
+            d="M2.66406 19.0625C3.50877 17.5991 4.72384 16.3838 6.18712 15.5389C7.65039 14.694 9.31031 14.2492 11 14.2492C12.6897 14.2492 14.3496 14.694 15.8129 15.5389C17.2762 16.3838 18.4912 17.5991 19.3359 19.0625"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
 
           {/* Cart */}
           <svg
@@ -226,8 +257,8 @@ const Header = () => {
 
           <div className="mb-4">
             <Select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
               options={optionsLanguage}
               className="w-full"
             />
