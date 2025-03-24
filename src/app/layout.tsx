@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { 
+  Geist, 
+  Geist_Mono, 
+  Poppins, 
+  Space_Mono, 
+  Open_Sans 
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +22,19 @@ const geistPoppins = Poppins({
   variable: '--font-geist-poppins',
   subsets: ["latin"],
   weight: ["400"]
-})
+});
+
+const geistSpaceMono = Space_Mono({
+  variable: "--font-geist-space_mono",
+  subsets: ["latin"],
+  weight: ["400"]
+});
+
+const geistOpenSans = Open_Sans({
+  variable: "--font-geist-open-sans",
+  subsets: ["latin"],
+  weight: ["400"]
+});
 
 export const metadata: Metadata = {
   title: "ChocóMarket",
@@ -31,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistPoppins.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} antialiased`}
       >
         {children}
       </body>
