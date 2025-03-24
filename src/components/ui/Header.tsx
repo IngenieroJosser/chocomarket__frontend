@@ -32,13 +32,13 @@ const Header = () => {
       <nav className="hidden md:flex items-center gap-14 justify-between">
         <ul className="flex flex-row gap-2">
           <li>
-            <Link href="#" className="hover:text-gray-600">Compras</Link>
+            <Link href="#" className="hover:border-b-2 border-[#008060]">Compras</Link>
           </li>
           <li>
-            <Link href="#" className="hover:text-gray-600">Ventas</Link>
+            <Link href="#" className="hover:border-b-2 border-[#008060]">Ventas</Link>
           </li>
           <li>
-            <Link href="#" className="hover:text-gray-600">Impulsa tus ventas</Link>
+            <Link href="#" className="hover:border-b-2 border-[#008060]">Impulsa tus ventas</Link>
           </li>
         </ul>
 
