@@ -40,16 +40,16 @@ const Header = () => {
       <nav className="hidden md:flex items-center gap-14 justify-between">
         <ul className="flex flex-row gap-2">
           <li>
-            <Link href="#" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
+            <Link href="/products" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
              before:content-[''] before:absolute before:bottom-0 before:left-0 
              before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
              before:transition-all before:duration-300 hover:before:h-full 
              hover:text-white transition-colors duration-300">
-              Compras
+              Productos
             </Link>
           </li>
           <li>
-            <Link href="#" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
+            <Link href="/sales" className="relative inline-block px-1 py-0.5 overflow-hidden z-10
              before:content-[''] before:absolute before:bottom-0 before:left-0 
              before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
              before:transition-all before:duration-300 hover:before:h-full 

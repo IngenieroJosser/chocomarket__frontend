@@ -23,3 +23,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans);
 }
+
+::selection {
+  background-color: rgba(0, 95, 74, .5);
+  color: #ffffff; 
+}
