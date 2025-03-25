@@ -127,7 +127,7 @@ const Header = () => {
             aria-hidden="true"
             focusable="false"
             role="presentation"
-            className="icon icon-account w-6 h-6 text-[#008060] transition-all duration-300 hover:text-[#005f4a] hover:drop-shadow-[0_0_8px_#00c28b]"
+            className=" cursor-pointer icon icon-account w-6 h-6 text-[#008060] transition-all duration-300 hover:text-[#005f4a] hover:drop-shadow-[0_0_8px_#00c28b]"
             fill="none"
             viewBox="0 0 22 23"
             aria-label="Cuenta de usuario"
@@ -149,7 +149,7 @@ const Header = () => {
 
           {/* Cart */}
           <svg
-            className="icon icon-cart"
+            className="icon icon-cart cursor-pointer"
             width="22"
             height="23"
             viewBox="0 0 22 23"
