@@ -39,7 +39,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14">
+    <header className="bg-[#F9F9F9] flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14">
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
         <Image
