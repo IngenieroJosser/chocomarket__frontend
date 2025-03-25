@@ -1,12 +1,14 @@
+// app/layout.tsx
 import type { Metadata } from "next";
-import { 
-  Geist, 
-  Geist_Mono, 
-  Poppins, 
-  Space_Mono, 
-  Open_Sans 
+import {
+  Geist,
+  Geist_Mono,
+  Poppins,
+  Space_Mono,
+  Open_Sans
 } from "next/font/google";
 import "./globals.css";
+import { PageLoader } from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +53,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased`}
       >
+        <PageLoader /> {/* Aquí se muestra el spinner cuando cambian las rutas */}
         {children}
       </body>
     </html>
