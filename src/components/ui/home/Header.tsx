@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Select } from "../../Select";
@@ -23,9 +23,19 @@ const Header = () => {
     { label: "USD $", value: "usd" },
   ];
 
+  useEffect(() => {
+    const darkMode = localStorage.getItem("darkMode");
+    if (darkMode === "true") {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+    const newMode = !isDark;
+    setIsDark(newMode);
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("darkMode", String(newMode));
   };
 
   return (
