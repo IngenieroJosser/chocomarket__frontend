@@ -5,9 +5,10 @@ import Link from "next/link";
 import { Select } from "../../Select";
 
 const Header = () => {
-  const [language, setLanguage] = useState<string>('');
+  const [language, setLanguage] = useState<string>("es");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [moneyCountry, setMoneyCountry] = useState<string>('');
+  const [moneyCountry, setMoneyCountry] = useState<string>('cop');
+  const [isDark, setIsDark] = useState(false);
 
   const optionsLanguage = [
     { label: "ES", value: "es" },
@@ -16,11 +17,16 @@ const Header = () => {
   ];
 
   const optionMoney = [
+    { label: "COP $", value: "cop" },
     { label: "EUR $", value: "eur" },
     { label: "CAD $", value: "cad" },
-    { label: "US $", value: "us" },
-    { label: "COP $", value: "cop" },
+    { label: "USD $", value: "usd" },
   ];
+
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
 
   return (
     <header className="flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14">
@@ -65,6 +71,7 @@ const Header = () => {
           </li>
           <li>
             <Link
+              // #5A3E29
               href="/sellers"
               className="relative inline-block px-1 py-0.5 overflow-hidden z-10
              before:content-[''] before:absolute before:bottom-0 before:left-0 
@@ -96,12 +103,14 @@ const Header = () => {
         <div className="flex flex-row gap-2.5">
           {/* Dark Mode */}
           <svg
+            onClick={toggleDarkMode}
             className="icon icon-dark-mode cursor-pointer"
             width="22"
             height="23"
             viewBox="0 0 22 23"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-label="Modo oscuro"
           >
             <path
               d="M18.6226 13.614C17.2728 13.9925 15.8466 14.0049 14.4904 13.65C13.1342 13.295 11.897 12.5855 10.9057 11.5942C9.91444 10.6029 9.20489 9.36568 8.84992 8.0095C8.49495 6.65333 8.50735 5.22711 8.88586 3.87732C7.55509 4.24772 6.34458 4.96032 5.37492 5.94414C4.40526 6.92797 3.71028 8.14867 3.35921 9.48468C3.00814 10.8207 3.01323 12.2253 3.37397 13.5588C3.73472 14.8922 4.43853 16.1078 5.4153 17.0846C6.39206 18.0614 7.6077 18.7652 8.94112 19.1259C10.2745 19.4867 11.6792 19.4918 13.0152 19.1407C14.3512 18.7896 15.5719 18.0946 16.5558 17.125C17.5396 16.1553 18.2522 14.9448 18.6226 13.614Z"
@@ -121,6 +130,7 @@ const Header = () => {
             className="icon icon-account w-6 h-6 text-[#008060] transition-all duration-300 hover:text-[#005f4a] hover:drop-shadow-[0_0_8px_#00c28b]"
             fill="none"
             viewBox="0 0 22 23"
+            aria-label="Cuenta de usuario"
           >
             <path
               d="M11 14.25C14.0376 14.25 16.5 11.7876 16.5 8.75C16.5 5.71243 14.0376 3.25 11 3.25C7.96243 3.25 5.5 5.71243 5.5 8.75C5.5 11.7876 7.96243 14.25 11 14.25Z"
@@ -145,6 +155,7 @@ const Header = () => {
             viewBox="0 0 22 23"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-label="Carrito de compras"
           >
             <path
               d="M17.9437 6.6875H4.05622C3.88705 6.68829 3.72396 6.75067 3.59744 6.86296C3.47091 6.97525 3.3896 7.12978 3.36872 7.29766L2.14841 18.2977C2.13756 18.3935 2.14699 18.4906 2.1761 18.5825C2.20521 18.6745 2.25335 18.7593 2.31738 18.8314C2.38141 18.9035 2.4599 18.9614 2.54776 19.0012C2.63561 19.041 2.73086 19.0619 2.82732 19.0625H19.1726C19.2691 19.0619 19.3643 19.041 19.4522 19.0012C19.54 18.9614 19.6185 18.9035 19.6826 18.8314C19.7466 18.7593 19.7947 18.6745 19.8238 18.5825C19.853 18.4906 19.8624 18.3935 19.8515 18.2977L18.6312 7.29766C18.6103 7.12978 18.529 6.97525 18.4025 6.86296C18.276 6.75067 18.1129 6.68829 17.9437 6.6875Z"
@@ -272,27 +283,42 @@ const Header = () => {
         <div className="md:hidden absolute top-20 left-0 right-0 bg-white z-50 py-4 px-6 border-b border-black">
           <ul className="flex flex-col gap-4 mb-4">
             <li>
-              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
+              <Link
+                href="#"
+                className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300"
+              >
                 Compras
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
+              <Link
+                href="#"
+                className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300"
+              >
                 Ventas
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
+              <Link
+                href="#"
+                className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300"
+              >
                 Impulsa tus ventas
               </Link>
             </li>
             <li>
-              <Link href="/login" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
+              <Link
+                href="/login"
+                className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300"
+              >
                 Iniciar sesión
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
+              <Link
+                href="#"
+                className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300"
+              >
                 Registrate
               </Link>
             </li>
