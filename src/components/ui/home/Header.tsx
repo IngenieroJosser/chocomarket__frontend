@@ -9,6 +9,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [moneyCountry, setMoneyCountry] = useState<string>('cop');
   const [isDark, setIsDark] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const optionsLanguage = [
     { label: "ES", value: "es" },
@@ -31,6 +32,19 @@ const Header = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 20); // Cambia 20 por el número de píxeles que quieras
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const toggleDarkMode = () => {
     const newMode = !isDark;
     setIsDark(newMode);
@@ -39,7 +53,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#F9F9F9] flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14">
+    <header className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+      scrolled ? 'bg-[rgba(255,255,255,.7)]' : 'bg-transparent'
+    }`}>
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
         <Image

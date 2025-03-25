@@ -3,24 +3,24 @@ import Image from "next/image"
 const Presentation = () => {
   const imagesPresentation = [
     {
-      src: "/presentation-img1.webp",
-      alt: "Aventura en la naturaleza",
-      title: "Naturaleza Viva",
+      src: '/presentation-img1.webp',
+      alt: 'Aventura en la naturaleza',
+      title: 'Naturaleza Viva',
     },
     {
-      src: "/presentation-img4.webp",
-      alt: "Tour cultural",
-      title: "Cultura y Tradición",
+      src: '/presentation-img4.webp',
+      alt: 'Tour cultural',
+      title: 'Cultura y Tradición',
     },
     {
-      src: "/presentation-img6.webp",
-      alt: "Rutas mágicas",
-      title: "Rutas Mágicas",
+      src: '/presentation-img6.webp',
+      alt: 'Rutas mágicas',
+      title: 'Rutas Mágicas',
     },
     {
-      src: "/presentation-img5.webp",
-      alt: "Joss Vibes",
-      title: "Joss Vibes",
+      src: '/presentation-img5.webp',
+      alt: 'Joss Vibes',
+      title: 'Joss Vibes',
     },
   ]
 
