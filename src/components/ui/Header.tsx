@@ -23,7 +23,7 @@ const Header = () => {
   ]
 
   return (
-    <header className="flex items-center justify-between p-6 border-b border-black px-4 md:px-16">
+    <header className="flex items-center justify-between p-6 border-b border-black px-4 md:px-14">
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
         <Image
@@ -76,12 +76,12 @@ const Header = () => {
             className="w-20 border-none"
           />
 
-          <Select 
+          {/* <Select 
             value={moneyCountry}
             onChange={(e) => setMoneyCountry(e.target.value)}
             options={optionMoney}
             className="w-20"
-          />
+          /> */}
         </div>
 
         <div className="flex flex-row gap-2.5">
@@ -153,6 +153,14 @@ const Header = () => {
             />
           </svg>
         </div>
+        <ul className="flex flex-row gap-2">
+          <li className="list-none">
+            <Link href='/login' className="border-b-2 border-transparent hover:border-[#ff0000] transition-all duration-300">Iniciar sesión</Link>
+          </li>
+          <li className="list-none">
+            <Link href='' className="border-b-2 border-transparent hover:border-[#ff0000] transition-all duration-300">Registrate</Link>
+          </li>
+        </ul>
       </nav>
 
       {/* Mobile Navigation - Visible only on mobile */}
@@ -252,6 +260,12 @@ const Header = () => {
             </li>
             <li>
               <Link href="#" className="block py-2">Impulsa tus ventas</Link>
+            </li>
+            <li>
+              <Link href='/login' className="block py-2">Iniciar sesión</Link>
+            </li>
+            <li>
+              <Link href='#' className="block py-2">Registrate</Link>
             </li>
           </ul>
 
