@@ -162,7 +162,7 @@ const Header = () => {
             />
           </svg>
         </div>
-        <ul className="flex flex-row gap-2">
+        <ul className="flex flex-row gap-4">
           <li className="list-none">
             <Link
               href="/login"
@@ -272,27 +272,27 @@ const Header = () => {
         <div className="md:hidden absolute top-20 left-0 right-0 bg-white z-50 py-4 px-6 border-b border-black">
           <ul className="flex flex-col gap-4 mb-4">
             <li>
-              <Link href="#" className="block py-2">
+              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
                 Compras
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2">
+              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
                 Ventas
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2">
+              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
                 Impulsa tus ventas
               </Link>
             </li>
             <li>
-              <Link href="/login" className="block py-2">
+              <Link href="/login" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
                 Iniciar sesión
               </Link>
             </li>
             <li>
-              <Link href="#" className="block py-2">
+              <Link href="#" className="block py-2 border-b-2 border-transparent hover:border-[#5A3E29] transition-all duration-300">
                 Registrate
               </Link>
             </li>
