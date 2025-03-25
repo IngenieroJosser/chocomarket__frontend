@@ -1,7 +1,7 @@
-const ProductPage = () => {
+const ShopPage = () => {
   return (
     <div>Todos los productos...</div>
   )
 }
 
-export default ProductPage
+export default ShopPage

@@ -1,6 +1,9 @@
 const SalesPage = () => {
   return (
-    <div>Todas las ventas...</div>
+    <div>Filtros para los productos... (
+      Home
+      /
+      Home Accents)</div>
   )
 }
 

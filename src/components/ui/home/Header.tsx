@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Select } from "../Select";
+import { Select } from "../../Select";
 
 const Header = () => {
   const [language, setLanguage] = useState<string>('');
@@ -41,7 +41,7 @@ const Header = () => {
         <ul className="flex flex-row gap-2">
           <li>
             <Link
-              href="/products"
+              href="/shop"
               className="relative inline-block px-1 py-0.5 overflow-hidden z-10
              before:content-[''] before:absolute before:bottom-0 before:left-0 
              before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
@@ -65,7 +65,7 @@ const Header = () => {
           </li>
           <li>
             <Link
-              href="#"
+              href="/sellers"
               className="relative inline-block px-1 py-0.5 overflow-hidden z-10
              before:content-[''] before:absolute before:bottom-0 before:left-0 
              before:w-full before:h-0 before:bg-[#008060] before:z-[-1] 
