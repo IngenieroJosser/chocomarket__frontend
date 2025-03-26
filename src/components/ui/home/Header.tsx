@@ -54,7 +54,7 @@ const Header = () => {
 
   return (
     <header className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
-      scrolled ? 'bg-[rgba(255,255,255,.7)]' : 'bg-transparent'
+      scrolled ? 'bg-[rgba(255,255,255,.56)]' : 'bg-transparent'
     }`}>
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
