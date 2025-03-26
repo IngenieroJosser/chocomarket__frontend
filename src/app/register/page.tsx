@@ -1,10 +1,10 @@
-'use client'; // si estás en app router de Next.js
+'use client';
 
 import { useState } from 'react';
 import { Input } from '@/components/Input';
 import { registerUser } from '@/services/auth/authService';
 import { useRouter } from 'next/navigation';
-// import { useRouter } from 'next/router'; // si usas Pages Router
+import Image from 'next/image';
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -40,26 +40,45 @@ const RegisterPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded shadow space-y-4">
-      <h2 className="text-2xl font-bold text-[#008060] mb-2">Crear Cuenta</h2>
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br px-4 animate-fade-in">
+      {/* Logo animado */}
+      <div className="mb-6 md:mb-0 md:mr-12 transition-all duration-700 ease-in-out transform hover:scale-105">
+        <Image
+          src="/presentation-img4.webp"
+          alt="Logo de ChocóMarket"
+          width={410}
+          height={410}
+          className="object-cover"
+        />
+      </div>
 
-      <Input label="Nombre completo" name="name" value={formData.name} onChange={handleChange} />
-      <Input label="Correo electrónico" name="email" type="email" value={formData.email} onChange={handleChange} />
-      <Input label="Teléfono" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-      <Input label="Dirección" name="address" value={formData.address} onChange={handleChange} />
-      <Input label="Contraseña" name="password" type="password" value={formData.password} onChange={handleChange} />
-
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-
-      <button
-        type="submit"
-        className="bg-[#008060] text-white py-2 px-4 rounded hover:bg-[#00694d] transition"
-        disabled={loading}
+      {/* Formulario */}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md p-8 md:p-8 space-y-4 transition-all duration-700 ease-in-out transform hover:scale-[1.01]"
       >
-        {loading ? 'Registrando...' : 'Registrarse'}
-      </button>
-    </form>
-  )
-}
+        <h2 className="text-3xl font-extrabold text-[#008060] text-center">Crear mi cuenta</h2>
 
-export default RegisterPage
+        <Input label="Nombre completo" name="name" value={formData.name} onChange={handleChange} />
+        <Input label="Correo electrónico" name="email" type="email" value={formData.email} onChange={handleChange} />
+        <Input label="Teléfono" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+        <Input label="Dirección" name="address" value={formData.address} onChange={handleChange} />
+        <Input label="Contraseña" name="password" type="password" value={formData.password} onChange={handleChange} />
+
+        {error && (
+          <p className="text-red-500 text-sm text-center animate-pulse">{error}</p>
+        )}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-[#008060] text-white py-3 rounded cursor-pointer font-semibold shadow-md transition duration-300 ease-in-out hover:bg-[#00694d] hover:shadow-xl"
+        >
+          {loading ? 'Registrando...' : 'Registrarse'}
+        </button>
+      </form>
+    </section>
+  );
+};
+
+export default RegisterPage;

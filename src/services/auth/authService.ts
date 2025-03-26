@@ -8,11 +8,11 @@ export interface RegisterData {
   password: string;
 }
 
-const API_URL_BACKEND = process.env.NEXT_PUBLIC_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function registerUser(data: RegisterData) {
   try {
-    const response = await axios.post(`${API_URL_BACKEND}/auth/register`, data);
+    const response = await axios.post(`${baseURL}auth/register`, data);
     return response.data;
   } catch (error: any) {
     const message = error.response?.data?.message || 'Error al registrar el usuario';
