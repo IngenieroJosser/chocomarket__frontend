@@ -3,29 +3,29 @@ import Link from "next/link";
 const MainProduct = () => {
   const productGrid = [
     {
-      img: "/presentation-img5.webp",
+      img: "/presentation-img3.webp",
       name: "Producto1",
-      price: `$3909COP`,
+      price: `$3909 COP`,
     },
     {
-      img: "/presentation-img5.webp",
+      img: "/presentation-img1.webp",
       name: "Producto2",
-      price: `$3909COP`,
+      price: `$3909 COP`,
     },
     {
-      img: "/presentation-img5.webp",
+      img: "/presentation-img2.webp",
       name: "Producto3",
-      price: `$3909COP`,
+      price: `$3909 COP`,
+    },
+    {
+      img: "/presentation-img4.webp",
+      name: "Producto4",
+      price: `$3909 COP`,
     },
     {
       img: "/presentation-img5.webp",
-      name: "Producto1",
-      price: `$3909COP`,
-    },
-    {
-      img: "/presentation-img5.webp",
-      name: "Producto1",
-      price: `$3909COP`,
+      name: "Producto5",
+      price: `$3909 COP`,
     },
   ];
 
@@ -35,7 +35,7 @@ const MainProduct = () => {
         <h3 className="text-2xl font-bold mb-2 md:mb-0">Tus Productos</h3>
         <Link
           href="/shop"
-          className="bg-black rounded-md px-5 py-5 text-white text-center md:text-left transition-all ease-in-out hover:bg-gray-900"
+          className="bg-black rounded-md px-5 py-5 text-white text-center md:text-left transition-all ease-in-out hover:bg-[rgba(0,128,96,.89)]"
         >
           Compra tus productos
         </Link>
@@ -51,16 +51,16 @@ const MainProduct = () => {
               <img
                 src={product.img}
                 alt={product.name}
-                className="w-full h-48 object-cover"
+                className="w-full h-96 object-cover"
               />
               {/* Botón al hacer hover */}
               <button className="cursor-pointer absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,.6)] bg-opacity-50 text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                 Vista previa
               </button>
             </div>
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">{product.name}</h3>
-              <p className="text-gray-600">{product.price}</p>
+            <div className="p-4 uppercase">
+              <h3 className="text-lg font-semibold border-b-2 border-transparent hover:border-[#008060] transition-all duration-300">{product.name}</h3>
+              <p className="text-gray-600 text-center">{product.price}</p>
             </div>
           </div>
         ))}
