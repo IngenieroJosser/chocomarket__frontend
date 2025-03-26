@@ -9,7 +9,6 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { PageLoader } from "@/components/PageLoader";
-import Header from "@/components/ui/home/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,10 +53,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased`}
       >
-       <>
-        <Header />
         <PageLoader /> {/* Aquí se muestra el spinner cuando cambian las rutas */}
-       </>
         {children}
       </body>
     </html>
