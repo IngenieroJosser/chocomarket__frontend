@@ -210,7 +210,7 @@ const Header = () => {
           </li>
           <li className="list-none">
             <Link
-              href=""
+              href="/register"
               className="border-b-2 border-transparent hover:border-[#ff0000] transition-all duration-300"
             >
               Registrate
