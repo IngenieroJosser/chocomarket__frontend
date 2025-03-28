@@ -16,21 +16,19 @@ const LoginPage = () => {
   const router = useRouter();
 
   const [formDataLogin, setFormDataLogin] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [modalForgotPassword, setModalForgotPassword] =
-    useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [modalForgotPassword, setModalForgotPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
   const [modalVerifyOtp, setModalVerifyOtp] = useState<boolean>(false);
-  const [modalUpdatePassword, setModalUpdatePassword] =
-    useState<boolean>(false);
-  const [otp, setOtp] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [modalUpdatePassword, setModalUpdatePassword] = useState<boolean>(false);
+  const [otp, setOtp] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormDataLogin({ ...formDataLogin, [e.target.name]: e.target.value });
@@ -43,6 +41,9 @@ const LoginPage = () => {
 
     try {
       await userAuthenticated(formDataLogin);
+
+      if (!formDataLogin.email) alert('El email no existe');
+
       router.push("/shop");
     } catch (err: any) {
       setError(err.message);
