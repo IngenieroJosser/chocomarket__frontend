@@ -1,6 +1,11 @@
+'use client';
+
+import { useState } from "react";
 import Link from "next/link";
 
 const MainProduct = () => {
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
   const productGrid = [
     {
       img: "/presentation-img3.webp",
@@ -31,6 +36,7 @@ const MainProduct = () => {
 
   return (
     <section className="p-10 mt-10">
+      {/* Header */}
       <div className="flex flex-col my-[2em] md:flex-row md:justify-between gap-4 md:gap-8 mb-3.5">
         <h3 className="text-2xl font-bold mb-2 md:mb-0">Tus Productos</h3>
         <Link
@@ -41,6 +47,7 @@ const MainProduct = () => {
         </Link>
       </div>
 
+      {/* Productos */}
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {productGrid.map((product, index) => (
           <div
@@ -53,18 +60,48 @@ const MainProduct = () => {
                 alt={product.name}
                 className="w-full h-96 object-cover"
               />
-              {/* Botón al hacer hover */}
-              <button className="cursor-pointer absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,.6)] bg-opacity-50 text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+              <button
+                onClick={() => setSelectedProduct(product)}
+                className="cursor-pointer absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,.6)] text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
+              >
                 Vista previa
               </button>
             </div>
             <div className="p-4 uppercase">
-              <h3 className="text-lg font-semibold border-b-2 border-transparent hover:border-[#008060] transition-all duration-300">{product.name}</h3>
+              <h3 className="text-lg font-semibold border-b-2 border-transparent hover:border-[#008060] transition-all duration-300">
+                {product.name}
+              </h3>
               <p className="text-gray-600 text-center">{product.price}</p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-[rgba(0,0,0,.6)] bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white shadow-lg p-12 max-w-md w-full animate-fade-in">
+            <div className="relative">
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className=" cursor-pointer absolute top-2 right-2 text-[#ff0000] w-8 h-8 flex items-center justify-center font-bold hover:bg-red-300 transition"
+              >
+                ✕
+              </button>
+              <img
+                src={selectedProduct.img}
+                alt={selectedProduct.name}
+                className="w-dvw h-96 object-cover mb-4"
+              />
+              <h2 className="text-2xl uppercase font-bold text-[#008060] mb-2">{selectedProduct.name}</h2>
+              <p className="text-[#5A3E29] font-medium mb-2">{selectedProduct.price}</p>
+              <p className="text-sm text-gray-600">
+                Este es un producto de excelente calidad, ideal para tu espacio de trabajo o descanso. Disponible por tiempo limitado.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
