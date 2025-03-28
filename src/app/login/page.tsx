@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Input } from "@/components/Input";
+import { Alert } from "@/components/Alert";
 import { userAuthenticated } from "@/services/auth/authService";
 import {
   forgotPassword,
@@ -11,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -29,6 +31,8 @@ const LoginPage = () => {
   const [otp, setOtp] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState<'success' | 'error' | 'info'>('info');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormDataLogin({ ...formDataLogin, [e.target.name]: e.target.value });
@@ -37,20 +41,36 @@ const LoginPage = () => {
   const handleSubmitLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-
+    setError('');
+  
+    const { email, password } = formDataLogin;
+  
+    if (!email || !password) {
+      toast.error('Todos los campos son obligatorios');
+      setLoading(false);
+      return;
+    }
+  
+    if (!email.includes('@')) {
+      toast.error('El correo electrónico debe tener un formato válido');
+      setLoading(false);
+      return;
+    }
+  
     try {
-      await userAuthenticated(formDataLogin);
-
-      if (!formDataLogin.email) alert('El email no existe');
-
-      router.push("/shop");
+      const response = await userAuthenticated(formDataLogin);
+    
+      // Guardo el token
+      localStorage.setItem('token', response.token);
+    
+      toast.success('Inicio de sesión exitoso');
+      router.push('/shop');
     } catch (err: any) {
       setError(err.message);
-    } finally {
-      setLoading(false);
+      toast.error(err.message);
     }
-  };
+    setLoading(false);
+  };  
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +79,9 @@ const LoginPage = () => {
 
     try {
       await forgotPassword({ email }); //  Es un objeto porque tengo una interface que está validando los datos
+      toast.success("OTP enviada al correo");
+      setModalForgotPassword(false);
+      setModalVerifyOtp(true);
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -89,6 +112,12 @@ const LoginPage = () => {
 
     try {
       await resetPassword({ email, newPassword });
+      if (newPassword.length < 6) {
+        setAlertMessage("La contraseña debe tener al menos 6 caracteres");
+        setAlertType("error");
+        return;
+      }
+      
       setModalUpdatePassword(false);
       alert("Contraseña actualizada exitosamente");
       // Puedes redirigir al login si quieres:
@@ -134,11 +163,10 @@ const LoginPage = () => {
             onChange={handleChange}
           />
 
-          {error && (
-            <p className="text-red-500 text-sm text-center animate-pulse">
-              {error}
-            </p>
-          )}
+          {/* Para mostrar alerta de error */}
+          {alertMessage && 
+            <Alert type={alertType} message={alertMessage} />
+          }
 
           <button
             type="submit"
