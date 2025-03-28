@@ -6,6 +6,7 @@ import { registerUser } from "@/services/auth/authService";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -29,16 +30,18 @@ const RegisterPage = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
+  
     try {
       await registerUser(formData);
-      router.push("/login");
+      toast.success(`Registro exitoso. ¡Bienvenid@! ${formData.name}`);
+      router.push('/login');
     } catch (err: any) {
+      toast.error(err.message || 'Error al registrarse.');
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
+  };  
 
   return (
     <>
