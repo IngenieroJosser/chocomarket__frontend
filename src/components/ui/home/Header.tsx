@@ -41,7 +41,11 @@ const Header = () => {
 
   return (
     <header
+<<<<<<< HEAD
       className={`flex items-center justify-between p-4 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+=======
+      className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+>>>>>>> 25aabf07b9702f402147dc81b65efbceb1463c77
         scrolled === null
           ? ""
           : scrolled

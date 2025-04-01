@@ -9,6 +9,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { PageLoader } from "@/components/PageLoader";
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
       >
         <PageLoader /> {/* Aquí se muestra el spinner cuando cambian las rutas */}
         {children}
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );
