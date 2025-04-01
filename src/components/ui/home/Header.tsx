@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Select } from "../../Select";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 const Header = () => {
   const [language, setLanguage] = useState<string>("es");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [moneyCountry, setMoneyCountry] = useState<string>('cop');
-  const [isDark, setIsDark] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [moneyCountry, setMoneyCountry] = useState<string>("cop");
+  const [scrolled, setScrolled] = useState<boolean | null>(null);
+  const { isDark, toggleDarkMode } = useDarkMode();
 
   const optionsLanguage = [
     { label: "ES", value: "es" },
@@ -25,37 +26,30 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    const darkMode = localStorage.getItem("darkMode");
-    if (darkMode === "true") {
-      setIsDark(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      setScrolled(offset > 20); // Cambia 20 por el número de píxeles que quieras
+      setScrolled(offset > 20);
     };
   
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Ejecuta una vez por si ya hizo scroll
   
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const toggleDarkMode = () => {
-    const newMode = !isDark;
-    setIsDark(newMode);
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode", String(newMode));
-  };
-
   return (
-    <header className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
-      scrolled ? 'bg-[rgba(255,255,255,.56)]' : 'bg-transparent'
-    }`}>
+    <header
+      className={`flex items-center justify-between p-4 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+        scrolled === null
+          ? ""
+          : scrolled
+            ? "bg-[rgba(255,255,255,0.56)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-md"
+            : "bg-transparent"
+      }`}
+    >
+
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
         <Image
@@ -130,9 +124,11 @@ const Header = () => {
           {/* Dark Mode */}
           <svg
             onClick={toggleDarkMode}
-            className="icon icon-dark-mode cursor-pointer"
-            width="22"
-            height="23"
+            className={`icon icon-dark-mode cursor-pointer transition-colors duration-300 ${
+              isDark ? "text-[#008060]" : "text-[rgba(0,0,0,.4)]"
+            }`}            
+            width="24"
+            height="24"
             viewBox="0 0 22 23"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
