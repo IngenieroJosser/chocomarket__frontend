@@ -38,7 +38,7 @@ const MainProduct = () => {
     <section className="p-10 mt-10">
       {/* Header */}
       <div className="flex flex-col my-[2em] md:flex-row md:justify-between gap-4 md:gap-8 mb-3.5">
-        <h3 className="text-2xl font-bold mb-2 md:mb-0">Tus Productos</h3>
+        <h3 className="font-bold mb-2 md:mb-0 uppercase text-[#008060]">Tus Productos</h3>
         <Link
           href="/shop"
           className="bg-black rounded-md px-5 py-5 text-white text-center md:text-left transition-all ease-in-out hover:bg-[rgba(0,128,96,.89)]"

@@ -63,7 +63,7 @@ const LoginPage = () => {
       // Guardo el token
       localStorage.setItem('token', response.token);
     
-      toast.success('Inicio de sesión exitoso');
+      toast.success(`Bienvenid@, ${response.name}`);
       router.push('/shop');
     } catch (err: any) {
       setError(err.message);
