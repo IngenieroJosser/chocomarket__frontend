@@ -31,13 +31,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-50 border-t">
+    <footer className="border-t">
       <div className="max-w-screen-xl w-full mx-auto px-6 py-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-2 mb-12">
           {/* Secciones principales */}
           {footerSections.map((section, index) => (
             <div key={index} className="space-y-2">
-              <h4 className="text-sm font-semibold uppercase tracking-wide mb-4">
+              <h4 className="text-sm font-semibold uppercase tracking-wide mb-4 text-[#008060]">
                 {section.title}
               </h4>
               <ul className="space-y-2">
@@ -45,7 +45,7 @@ const Footer = () => {
                   <li key={linkIndex}>
                     <a
                       href="#"
-                      className="text-gray-800 hover:text-gray-900 text-sm transition-colors"
+                      className="hover:text-gray-900 text-sm transition-colors"
                     >
                       {link}
                     </a>
@@ -57,12 +57,12 @@ const Footer = () => {
 
           {/* Sección de Contactos */}
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold uppercase tracking-wide mb-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wide mb-4 text-[#008060]">
               Contactos
             </h4>
             <ul className="space-y-2">
               {contactInfo.map((info, index) => (
-                <li key={index} className="text-gray-600 text-sm">
+                <li key={index} className="text-sm">
                   {info}
                 </li>
               ))}
@@ -71,10 +71,10 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wide mb-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wide mb-4 text-[#008060]">
               Mantente al día
             </h4>
-            <p className="text-gray-600 text-sm mb-4">
+            <p className="text-sm mb-4">
               Suscríbete a nuestro boletín y no te pierdas ninguna novedad, desde
               nuevos productos hasta ofertas exclusivas hechas solo para ti.
             </p>
@@ -91,7 +91,7 @@ const Footer = () => {
                 Suscribirse
               </button>
             </form>
-            <p className="text-gray-500 text-xs mt-4">
+            <p className="text-xs mt-4">
               Al hacer clic en el botón, aceptas nuestra{" "}
               <span className="font-semibold">Política de privacidad</span>
             </p>
@@ -128,7 +128,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <p className="text-center text-gray-500 text-sm mt-8">
+          <p className="text-center text-sm mt-8">
             © ChocóMarket. Todos los productos de esta tienda son solo para
             demostración.
             <br />

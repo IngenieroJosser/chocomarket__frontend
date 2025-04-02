@@ -21,21 +21,21 @@ const Advantages = () => {
   ];
 
   return (
-    <section className="bg-white py-16">
+    <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {advantages.map((advantage, index) => (
             <div
               key={index}
-              className="flex flex-col gap-4 p-6 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex flex-col gap-4 p-6 hover:rounded-lg transition-colors"
             >
-              <h3 className="text-xl font-bold text-gray-900 uppercase text-end">{advantage.title}</h3>
+              <h3 className="text-xl font-bold uppercase text-end text-[#008060]">{advantage.title}</h3>
               <p className="text-gray-600 leading-relaxed">
                 {advantage.description}
               </p>
               <a
                 href={advantage.linkHref}
-                className={`mt-2 font-medium transition-colors uppercase text-end duration-300 ${
+                className={`mt-2 font-bold transition-colors uppercase text-end duration-300 ${
                   advantage.linkText === "Contáctanos"
                     ? "text-emerald-950 hover:text-emerald-900"
                     : "text-emerald-800 hover:text-emerald-700"

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -38,7 +38,9 @@ const MainProduct = () => {
     <section className="p-10 mt-10">
       {/* Header */}
       <div className="flex flex-col my-[2em] md:flex-row md:justify-between gap-4 md:gap-8 mb-3.5">
-        <h3 className="font-bold mb-2 md:mb-0 uppercase text-[#008060]">Tus Productos</h3>
+        <h3 className="font-bold mb-2 md:mb-0 uppercase text-[#008060]">
+          Tus Productos
+        </h3>
         <Link
           href="/shop"
           className="bg-black rounded-md px-5 py-5 text-white text-center md:text-left transition-all ease-in-out hover:bg-[rgba(0,128,96,.89)]"
@@ -67,11 +69,13 @@ const MainProduct = () => {
                 Vista previa
               </button>
             </div>
-            <div className="p-4 uppercase">
-              <h3 className="text-lg font-semibold border-b-2 border-transparent hover:border-[#008060] transition-all duration-300">
+            <div className="p-4 uppercase bg-white dark:bg-[rgba(0,0,0,.8)] transition-colors duration-300 rounded-lg">
+              <h3 className="text-lg font-semibold border-b-2 border-transparent hover:border-[#008060] transition-all duration-300 text-gray-900 dark:text-white">
                 {product.name}
               </h3>
-              <p className="text-gray-600 text-center">{product.price}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-center">
+                {product.price}
+              </p>
             </div>
           </div>
         ))}
@@ -93,10 +97,15 @@ const MainProduct = () => {
                 alt={selectedProduct.name}
                 className="w-dvw h-96 object-cover mb-4"
               />
-              <h2 className="text-2xl uppercase font-bold text-[#008060] mb-2">{selectedProduct.name}</h2>
-              <p className="text-[#5A3E29] font-medium mb-2">{selectedProduct.price}</p>
+              <h2 className="text-2xl uppercase font-bold text-[#008060] mb-2">
+                {selectedProduct.name}
+              </h2>
+              <p className="text-[#5A3E29] font-medium mb-2">
+                {selectedProduct.price}
+              </p>
               <p className="text-sm text-gray-600">
-                Este es un producto de excelente calidad, ideal para tu espacio de trabajo o descanso. Disponible por tiempo limitado.
+                Este es un producto de excelente calidad, ideal para tu espacio
+                de trabajo o descanso. Disponible por tiempo limitado.
               </p>
             </div>
           </div>
