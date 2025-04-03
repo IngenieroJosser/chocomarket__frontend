@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { Input } from "@/components/Input";
@@ -12,14 +12,14 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    address: "",
-    password: "",
+    name: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    password: '',
   });
 
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,8 @@ const RegisterPage = () => {
     setError("");
   
     try {
-      await registerUser(formData);
+      const response = await registerUser(formData);
+      localStorage.setItem('userRole', response.name); 
       toast.success(`Registro exitoso. ¡Bienvenid@! ${formData.name}`);
       router.push('/login');
     } catch (err: any) {

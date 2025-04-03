@@ -1,6 +1,10 @@
+import ImagePresentation from "@/components/ui/shop/ImagePresentation"
+
 const ShopPage = () => {
   return (
-    <div>Todos los productos...</div>
+    <section>
+      <ImagePresentation />
+    </section>
   )
 }
 

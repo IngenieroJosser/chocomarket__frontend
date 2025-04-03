@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -24,15 +24,19 @@ const LoginPage = () => {
 
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [modalForgotPassword, setModalForgotPassword] = useState<boolean>(false);
+  const [modalForgotPassword, setModalForgotPassword] =
+    useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [modalVerifyOtp, setModalVerifyOtp] = useState<boolean>(false);
-  const [modalUpdatePassword, setModalUpdatePassword] = useState<boolean>(false);
+  const [modalUpdatePassword, setModalUpdatePassword] =
+    useState<boolean>(false);
   const [otp, setOtp] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState<'success' | 'error' | 'info'>('info');
+  const [alertType, setAlertType] = useState<"success" | "error" | "info">(
+    "info"
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormDataLogin({ ...formDataLogin, [e.target.name]: e.target.value });
@@ -46,31 +50,47 @@ const LoginPage = () => {
     const { email, password } = formDataLogin;
   
     if (!email || !password) {
-      toast.error('Todos los campos son obligatorios');
+      toast.error("Todos los campos son obligatorios");
       setLoading(false);
       return;
     }
   
-    if (!email.includes('@')) {
-      toast.error('El correo electrónico debe tener un formato válido');
+    if (!email.includes("@")) {
+      toast.error("El correo electrónico debe tener un formato válido");
       setLoading(false);
       return;
     }
   
     try {
-      const response = await userAuthenticated(formDataLogin);
-    
-      // Guardo el token
+      const response = await userAuthenticated({
+        email,
+        password
+      });
+  
       localStorage.setItem('token', response.token);
-    
-      toast.success(`Bienvenid@, ${response.name}`);
-      router.push('/shop');
+      localStorage.setItem('userRole', response.user.role);
+      localStorage.setItem('userName', response.user.name);
+      toast.success(`Hola, ${response.user.name || 'Usuario'}`);
+  
+      const userRole = response.user.role.toUpperCase();
+      switch (userRole) {
+        case "SELLER":
+          router.push("/seller-dashboard");
+          break;
+        case "ADMIN":
+          router.push("/admin-dashboard");
+          break;
+        case "BUYER":
+        default:
+          router.push("/shop");
+          break;
+      }
     } catch (err: any) {
-      setError(err.message);
       toast.error(err.message);
+      setError(err.message);
     }
     setLoading(false);
-  };  
+  };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +137,7 @@ const LoginPage = () => {
         setAlertType("error");
         return;
       }
-      
+
       setModalUpdatePassword(false);
       alert("Contraseña actualizada exitosamente");
       // Puedes redirigir al login si quieres:
@@ -164,9 +184,7 @@ const LoginPage = () => {
           />
 
           {/* Para mostrar alerta de error */}
-          {alertMessage && 
-            <Alert type={alertType} message={alertMessage} />
-          }
+          {alertMessage && <Alert type={alertType} message={alertMessage} />}
 
           <button
             type="submit"
