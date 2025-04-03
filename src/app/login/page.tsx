@@ -224,7 +224,7 @@ const LoginPage = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-800"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 mb-4 focus:outline-none text-black focus:ring-2 focus:ring-emerald-800"
                   required
                 />
                 <div className="flex justify-between">
