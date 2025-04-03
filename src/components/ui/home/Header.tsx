@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const Header = () => {
     {
       id: 1,
       name: "Bay Armchair",
-      image: '/presentation-img3.webp',
+      image: "/presentation-img3.webp",
       price: 449.0,
       color: "Green",
       quantity: 1,
@@ -62,10 +62,10 @@ const Header = () => {
       setIsLoggedIn(!!token);
       setUserName(name || "Usuario");
     };
-    
+
     checkAuth();
     window.addEventListener("storage", checkAuth);
-    
+
     return () => window.removeEventListener("storage", checkAuth);
   }, []);
 
@@ -80,11 +80,11 @@ const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userName");
-    
+
     // Actualizar estado
     setIsLoggedIn(false);
     setUserName("Usuario");
-    
+
     // Redirigir y recargar el estado
     router.push("/");
     router.refresh(); // Forzar actualización de la página
@@ -236,7 +236,7 @@ const Header = () => {
               />
             </svg>
           </div>
-          
+
           {!isLoggedIn ? (
             <ul className="flex flex-row gap-4">
               <li className="list-none">
@@ -263,7 +263,7 @@ const Header = () => {
               </span>
               <button
                 onClick={handleLogout}
-                className="text-red-500 hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
+                className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
               >
                 Cerrar sesión
               </button>
@@ -404,9 +404,19 @@ const Header = () => {
             </ul>
 
             {isLoggedIn && (
-              <div className="mb-4 text-center">
-                <span className="font-medium text-[#008060]">Bienvenid@ {userName}</span>
-              </div>
+              <>
+                <div className="mb-4 text-center flex flex-col gap-6">
+                  <span className="font-medium text-[#008060]">
+                    Hola, {userName}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
+                  >
+                    Cerrar sesión
+                  </button>
+                </div>
+              </>
             )}
 
             <div className="mb-4">
@@ -450,8 +460,10 @@ const Header = () => {
             className="bg-white w-full max-w-2xl h-screen p-6 overflow-y-auto"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Mi Carrito ({cartItems.length})</h2>
-              <button 
+              <h2 className="text-2xl font-bold">
+                Mi Carrito ({cartItems.length})
+              </h2>
+              <button
                 onClick={toggleCart}
                 className="text-2xl hover:text-gray-600"
               >
@@ -474,9 +486,15 @@ const Header = () => {
                             height={200}
                             alt={item.name}
                           />
-                          <h3 className="font-semibold uppercase">{item.name}</h3>
-                          <p className="text-sm text-gray-500">Color: {item.color}</p>
-                          <p className="text-lg">${item.price.toFixed(2)} CAD</p>
+                          <h3 className="font-semibold uppercase">
+                            {item.name}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            Color: {item.color}
+                          </p>
+                          <p className="text-lg">
+                            ${item.price.toFixed(2)} CAD
+                          </p>
                         </div>
                         <button
                           onClick={() => removeItem(item.id)}
@@ -493,7 +511,11 @@ const Header = () => {
                   <div className="flex justify-between font-semibold text-lg mb-4">
                     <span>Subtotal:</span>
                     <span>
-                      ${cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2)} CAD
+                      $
+                      {cartItems
+                        .reduce((sum, item) => sum + item.price, 0)
+                        .toFixed(2)}{" "}
+                      CAD
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 mb-6">
