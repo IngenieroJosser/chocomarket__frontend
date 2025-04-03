@@ -35,6 +35,9 @@ const Advantages = () => {
               </p>
               <a
                 href={advantage.linkHref}
+                target="_blank" 
+                rel="noopener noreferrer"
+                
                 className={`mt-2 font-bold transition-colors uppercase text-end duration-300 ${
                   advantage.linkText === "Contáctanos"
                     ? "text-emerald-950 hover:text-emerald-900"
