@@ -35,7 +35,7 @@ const SellersPage = () => {
     try {
       await registerUser(formData);
       toast.success(`Registro exitoso. ¡Bienvenid@! ${formData.name}`);
-      router.push('/admin');
+      router.push('/login');
     } catch (err: any) {
       toast.error(err.message || 'Error al registrarse.');
       setError(err.message);
