@@ -24,7 +24,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#008060] bg-white"
+        className="border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#008060] text-black bg-white"
       />
     </div>
   );
