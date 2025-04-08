@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest } from "@/lib/api";
 
 export interface CreateProductData {
   name: string;
@@ -30,49 +30,51 @@ export interface UpdateProductData {
   tags?: string[];
 }
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/';
-
-export async function createProduct(dataProduct: CreateProductData) {
-  try {
-    const newProduct = await axios.post(`${baseURL}product/`, dataProduct);
-    return newProduct.data;
-  } catch (error: any) {
-    throw new Error(
-      error.newProduct?.data?.message || 'Error al crear el producto'
-    );
-  }
+export interface Product {
+  id: number;
+  slug: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  imageUrl?: string;
+  status: string;
+  category: string;
+  discount?: number;
+  discountEnd?: Date;
+  isFeatured: boolean;
+  isVisible: boolean;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
-// slug: identificador del producto (ej. "café-del-chocó")
-export async function updateProduct(slug: string, updateData: UpdateProductData) {
-  try {
-    const updateProduct = await axios.patch(`${baseURL}product/${slug}`, updateData);
-    return updateProduct.data;
-  } catch (error: any) {
-    throw new Error(
-      error.updateProduct?.data?.message || 'Error al actualizar el producto'
-    );
-  }
+export interface ProductResponse {
+  message: string;
+  product: Product;
 }
 
-export async function findAProductBySlug(slug: string) {
-  try {
-    const getProductBySlug = await axios.post(`${baseURL}product/${slug}`);
-    return getProductBySlug.data;
-  } catch (error: any) {
-    throw new Error(
-      error.getProductBySlug?.data?.message || 'Slug no encontrado'
-    )
-  }
+export interface ProductListResponse {
+  message: string;
+  products: Product[];
 }
 
-export async function findAllProduct() {
-  try {
-    const responseAllProduct = await axios.get(`${baseURL}product/`);
-    return responseAllProduct.data;
-  } catch (error: any) {
-    throw new Error(
-      error.responseAllProduct?.data?.message || 'No se encontró ningún producto'
-    )
-  }
+export async function createProduct(dataProduct: CreateProductData): Promise<ProductResponse> {
+  return await apiRequest<ProductResponse>('POST', 'product/', dataProduct);
+}
+
+export async function updateProduct(slug: string, updateData: UpdateProductData): Promise<ProductResponse> {
+  return await apiRequest<ProductResponse>('PATCH', `product/${slug}`, updateData);
+}
+
+export async function findAProductBySlug(slug: string): Promise<ProductResponse> {
+  return await apiRequest<ProductResponse>('POST', `product/${slug}`);
+}
+
+export async function findAllProduct(): Promise<ProductListResponse> {
+  return await apiRequest<ProductListResponse>('GET', 'product/');
+}
+
+export async function removeProduct(id: number): Promise<ProductResponse> {
+  return await apiRequest<ProductResponse>('DELETE', `product/${id}`);
 }

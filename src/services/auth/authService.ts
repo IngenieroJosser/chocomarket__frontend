@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiRequest } from "@/lib/api";
 
 export interface RegisterData {
   name: string;
@@ -27,68 +27,38 @@ export interface VerifyOtpData {
   otp: string;
 }
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001/";
-
-export async function registerUser(data: RegisterData) {
-  try {
-    const response = await axios.post(`${baseURL}auth/register`, data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(
-      error.response?.data?.message || "Error al registrar el usuario"
-    );
-  }
+export interface AuthResponse {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    role: 'SELLER' | 'ADMIN' | 'BUYER';
+  };
 }
 
-export async function userAuthenticated(userAuth: LoginData) {
-  try {
-    const foundUserAuthenticated = await axios.post(`${baseURL}auth/signin`, userAuth);
-    return foundUserAuthenticated.data; // { token, user }
-  } catch (error: any) {
-    const message = error.foundUserAuthenticated?.data?.message || "Credenciales inválidas";
-    throw new Error(message);
-  }
+export interface GenericMessageResponse {
+  message: string;
 }
 
-export async function forgotPassword(getEmail: ForgotPasswordData) {
-  try {
-    const findAndValyUsers = await axios.post(
-      `${baseURL}auth/forgot-password`,
-      getEmail
-    );
-    return findAndValyUsers.data;
-  } catch (error: any) {
-    throw new Error(
-      error.findAndValyUsers?.data?.message || "Error al enviar el correo"
-    );
-  }
+export async function registerUser(data: RegisterData): Promise<AuthResponse> {
+  return await apiRequest<AuthResponse>("POST", "auth/register", data);
 }
 
-export async function verifyOtp(dataVerifyOtp: VerifyOtpData) {
-  try {
-    const responseDataVerifyOtp = await axios.post(
-      `${baseURL}auth/verify-otp`,
-      dataVerifyOtp
-    );
-    return responseDataVerifyOtp.data;
-  } catch (error: any) {
-    throw new Error(
-      error.responseDataVerifyOtp?.data?.message || "Error al verificar la OTP"
-    );
-  }
+export async function userAuthenticated(userAuth: LoginData): Promise<AuthResponse> {
+  return await apiRequest<AuthResponse>("POST", "auth/signin", userAuth);
 }
 
-export async function resetPassword(dataResetPassword: ResetPasswordData) {
-  try {
-    const responseResetPassword = await axios.post(
-      `${baseURL}auth/reset-password`,
-      dataResetPassword
-    );
-    return responseResetPassword.data;
-  } catch (error: any) {
-    throw new Error(
-      error.responseResetPassword?.data?.message ||
-        "Error al reestablecer la contraseña"
-    );
-  }
+export async function forgotPassword(getEmail: ForgotPasswordData): Promise<GenericMessageResponse> {
+  return await apiRequest<GenericMessageResponse>("POST", "auth/forgot-password", getEmail);
+}
+
+export async function verifyOtp(dataVerifyOtp: VerifyOtpData): Promise<GenericMessageResponse> {
+  return await apiRequest<GenericMessageResponse>("POST", "auth/verify-otp", dataVerifyOtp);
+}
+
+export async function resetPassword(dataResetPassword: ResetPasswordData): Promise<GenericMessageResponse> {
+  return await apiRequest<GenericMessageResponse>("POST", "auth/reset-password", dataResetPassword);
 }

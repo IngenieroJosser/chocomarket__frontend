@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import {
   Geist,
@@ -52,11 +51,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} antialiased`}
+        className={`${geistPoppins.variable} antialiased`}
       >
-        <PageLoader /> {/* Aquí se muestra el spinner cuando cambian las rutas */}
+        <PageLoader />
         {children}
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );

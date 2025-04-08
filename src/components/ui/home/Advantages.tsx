@@ -30,7 +30,7 @@ const Advantages = () => {
               className="flex flex-col gap-4 p-6 hover:rounded-lg transition-colors"
             >
               <h3 className="text-xl font-bold uppercase text-end text-[#008060]">{advantage.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="leading-relaxed">
                 {advantage.description}
               </p>
               <a
