@@ -30,6 +30,16 @@ export interface UpdateProductData {
   tags?: string[];
 }
 
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface User {
+  id: number;
+  email: string;
+}
+
 export interface Product {
   id: number;
   slug: string;
@@ -44,7 +54,8 @@ export interface Product {
   discountEnd?: Date;
   isFeatured: boolean;
   isVisible: boolean;
-  tags: string[];
+  tags: Tag[];
+  user: User; // ← asegúrate de que esté aquí
   createdAt: string;
   updatedAt: string;
 }
@@ -60,21 +71,21 @@ export interface ProductListResponse {
 }
 
 export async function createProduct(dataProduct: CreateProductData): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('POST', 'product/', dataProduct);
+  return await apiRequest<ProductResponse>('POST', 'products/', dataProduct);
 }
 
 export async function updateProduct(slug: string, updateData: UpdateProductData): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('PATCH', `product/${slug}`, updateData);
+  return await apiRequest<ProductResponse>('PATCH', `products/${slug}`, updateData);
 }
 
 export async function findAProductBySlug(slug: string): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('POST', `product/${slug}`);
+  return await apiRequest<ProductResponse>('POST', `products/${slug}`);
 }
 
 export async function findAllProduct(): Promise<ProductListResponse> {
-  return await apiRequest<ProductListResponse>('GET', 'product/');
+  return await apiRequest<ProductListResponse>('GET', 'products/');
 }
 
 export async function removeProduct(id: number): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('DELETE', `product/${id}`);
+  return await apiRequest<ProductResponse>('DELETE', `products/${id}`);
 }
