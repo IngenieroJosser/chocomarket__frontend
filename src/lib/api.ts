@@ -23,7 +23,18 @@ export const apiRequest = async <T>(
 
     return response.data as T;
   } catch (error: any) {
-    console.error("API Error:", error.response || error.message);
-    throw error;
+    if (axios.isAxiosError(error)) {
+      const message = error.response?.data?.message || error.message || 'Error desconocido';
+      console.error('API Error:', {
+        status: error.response?.status,
+        data: error.response?.data,
+        message,
+      });
+      throw new Error(message);
+    } else {
+      console.error('Error inesperado:', error);
+      throw error;
+    }
   }
+  
 };
