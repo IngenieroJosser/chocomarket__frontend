@@ -36,5 +36,4 @@ export const apiRequest = async <T>(
       throw error;
     }
   }
-  
 };
