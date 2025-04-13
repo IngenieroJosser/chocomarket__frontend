@@ -50,7 +50,7 @@ export async function registerUser(data: RegisterData): Promise<AuthResponse> {
 }
 
 export async function userAuthenticated(userAuth: LoginData): Promise<AuthResponse> {
-  return await apiRequest<AuthResponse>('POST', `${baseUrl}auth/signin`, userAuth); 
+  return await apiRequest<AuthResponse>('POST', `${baseUrl}auth/signin`, userAuth);
 }
 
 export async function forgotPassword(getEmail: ForgotPasswordData): Promise<GenericMessageResponse> {
