@@ -15,28 +15,28 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
-const geistPoppins = Poppins({
-  variable: '--font-geist-poppins',
-  subsets: ["latin"],
-  weight: ["400"]
-});
+// const geistPoppins = Poppins({
+//   variable: '--font-geist-poppins',
+//   subsets: ["latin"],
+//   weight: ["400"]
+// });
 
-const geistSpaceMono = Space_Mono({
-  variable: "--font-geist-space_mono",
-  subsets: ["latin"],
-  weight: ["400"]
-});
+// const geistSpaceMono = Space_Mono({
+//   variable: "--font-geist-space_mono",
+//   subsets: ["latin"],
+//   weight: ["400"]
+// });
 
-const geistOpenSans = Open_Sans({
-  variable: "--font-geist-open-sans",
-  subsets: ["latin"],
-  weight: ["400"]
-});
+// const geistOpenSans = Open_Sans({
+//   variable: "--font-geist-open-sans",
+//   subsets: ["latin"],
+//   weight: ["400"]
+// });
 
 export const metadata: Metadata = {
   title: "ChocóMarket",
@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistPoppins.variable} antialiased`}
+        className={`${geistSans.variable} antialiased`}
       >
         <PageLoader />
         {children}
