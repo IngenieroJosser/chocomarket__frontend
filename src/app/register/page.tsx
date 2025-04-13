@@ -33,7 +33,7 @@ const RegisterPage = () => {
   
     try {
       const response = await registerUser(formData);
-      localStorage.setItem('userRole', response.name); 
+      localStorage.setItem('userRole', formData.name);
       toast.success(`Registro exitoso. ¡Bienvenid@! ${formData.name}`);
       router.push('/login');
     } catch (err: any) {
