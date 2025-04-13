@@ -70,22 +70,24 @@ export interface ProductListResponse {
   products: Product[];
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/';
+
 export async function createProduct(dataProduct: CreateProductData): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('POST', 'products/', dataProduct);
+  return await apiRequest<ProductResponse>('POST', `${baseUrl}products/`, dataProduct);
 }
 
 export async function updateProduct(slug: string, updateData: UpdateProductData): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('PATCH', `products/${slug}`, updateData);
+  return await apiRequest<ProductResponse>('PATCH', `${baseUrl}products/${slug}`, updateData);
 }
 
 export async function findAProductBySlug(slug: string): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('POST', `products/${slug}`);
+  return await apiRequest<ProductResponse>('POST', `${baseUrl}products/${slug}`);
 }
 
 export async function findAllProduct(): Promise<ProductListResponse> {
-  return await apiRequest<ProductListResponse>('GET', 'products/');
+  return await apiRequest<ProductListResponse>('GET', `${baseUrl}products/`);
 }
 
 export async function removeProduct(id: number): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('DELETE', `products/${id}`);
+  return await apiRequest<ProductResponse>('DELETE', `${baseUrl}products/${id}`);
 }
