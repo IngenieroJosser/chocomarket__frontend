@@ -39,14 +39,14 @@ export interface AuthResponse {
   };
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
 export interface GenericMessageResponse {
   message: string;
 }
 
 export async function registerUser(data: RegisterData): Promise<AuthResponse> {
-  return await apiRequest<AuthResponse>('POST', `${baseUrl}/auth/registe`, data);
+  return await apiRequest<AuthResponse>('POST', `${baseUrl}/auth/register`, data);
 }
 
 export async function userAuthenticated(userAuth: LoginData): Promise<AuthResponse> {

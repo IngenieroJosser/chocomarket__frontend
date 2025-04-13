@@ -70,7 +70,7 @@ export interface ProductListResponse {
   products: Product[];
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
 export async function createProduct(dataProduct: CreateProductData): Promise<ProductResponse> {
   return await apiRequest<ProductResponse>('POST', `${baseUrl}/products/`, dataProduct);
