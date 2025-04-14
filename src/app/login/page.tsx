@@ -211,18 +211,38 @@ const LoginPage = () => {
 
       {/* Modal para recuperación de contraseña */}
       {modalForgotPassword && (
-        <div className="modal flex flex-col justify-center items-center h-64 text-gray-500">
-          <form onSubmit={handleForgotPassword}>
-            <h3>Recuperar contraseña</h3>
-            <Input
-              label="Correo electrónico"
-              name="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button type="submit">Enviar OTP</button>
-          </form>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn">
+            <h3 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-6">
+              Recuperar contraseña
+            </h3>
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div>
+                <label
+                  htmlFor="forgot-email"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
+                  Correo electrónico
+                </label>
+                <input
+                  id="forgot-email"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-300"
+              >
+                Enviar OTP
+              </button>
+            </form>
+          </div>
         </div>
       )}
 
