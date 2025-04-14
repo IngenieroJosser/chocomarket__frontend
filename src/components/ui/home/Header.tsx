@@ -22,7 +22,23 @@ const Header = () => {
       image: "/presentation-img3.webp",
       price: 449.0,
       color: "Green",
+      quantity: 3,
+    },
+    {
+      id: 2,
+      name: "Producto 2",
+      image: "/presentation-img2.webp",
+      price: 479.0,
+      color: "Blue",
       quantity: 1,
+    },
+    {
+      id: 3,
+      name: "Producto3",
+      image: "/presentation-img1.webp",
+      price: 549.0,
+      color: "Green",
+      quantity: 7,
     },
   ]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -258,7 +274,7 @@ const Header = () => {
             </ul>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-[#008060]">
+              <span className="text-sm font-medium">
                 Hola, {userName}
               </span>
               <button
@@ -460,7 +476,7 @@ const Header = () => {
             className="bg-white w-full max-w-2xl h-screen p-6 overflow-y-auto"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-2xl font-bold uppercase text-[#008060]">
                 Mi Carrito ({cartItems.length})
               </h2>
               <button
@@ -498,7 +514,7 @@ const Header = () => {
                         </div>
                         <button
                           onClick={() => removeItem(item.id)}
-                          className="text-red-500 hover:text-red-700 text-sm"
+                          className="bg-red-600 border-b-2 p-3 text-white hover:font-bold text-sm cursor-pointer transition-all duration-300"
                         >
                           Eliminar
                         </button>
@@ -522,13 +538,13 @@ const Header = () => {
                     Impuestos incluidos y envío calculado al finalizar
                   </p>
 
-                  <button className="w-full bg-[#008060] text-white py-3 rounded hover:bg-[#00694d] transition-colors">
+                  <button className="w-full bg-[#008060] cursor-pointer text-white py-3 rounded hover:bg-[#00694d] transition-colors">
                     Finalizar Compra
                   </button>
 
                   <button
                     onClick={toggleCart}
-                    className="w-full mt-4 text-[#008060] hover:text-[#00694d] underline"
+                    className="w-full mt-4 text-[#008060] cursor-pointer hover:text-[#00694d] underline"
                   >
                     Seguir comprando
                   </button>
