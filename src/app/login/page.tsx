@@ -18,23 +18,25 @@ const LoginPage = () => {
   const router = useRouter();
 
   const [formDataLogin, setFormDataLogin] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [modalForgotPassword, setModalForgotPassword] = useState<boolean>(false);
+  const [modalForgotPassword, setModalForgotPassword] =
+    useState<boolean>(false);
   const [modalVerifyOtp, setModalVerifyOtp] = useState<boolean>(false);
-  const [modalUpdatePassword, setModalUpdatePassword] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('');
-  const [otp, setOtp] = useState<string>('');
-  const [newPassword, setNewPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState<'success' | 'error' | 'info'>(
-    'info'
+  const [modalUpdatePassword, setModalUpdatePassword] =
+    useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [otp, setOtp] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState<"success" | "error" | "info">(
+    "info"
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -226,18 +228,38 @@ const LoginPage = () => {
 
       {/* Modal para verificar OTP */}
       {modalVerifyOtp && (
-        <div className="modal flex flex-col justify-center items-center h-64 text-gray-500">
-          <form onSubmit={handleVerifyOtp}>
-            <h3>Verificar OTP</h3>
-            <Input
-              label="Código OTP"
-              name="otp"
-              type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-            <button type="submit">Verificar</button>
-          </form>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn">
+            <h3 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-6">
+              Verificar OTP
+            </h3>
+            <form onSubmit={handleVerifyOtp} className="space-y-4">
+              <div>
+                <label
+                  htmlFor="otp"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
+                  Código OTP
+                </label>
+                <input
+                  id="otp"
+                  name="otp"
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-300"
+              >
+                Verificar
+              </button>
+            </form>
+          </div>
         </div>
       )}
 
