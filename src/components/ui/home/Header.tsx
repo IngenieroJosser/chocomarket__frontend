@@ -109,8 +109,12 @@ const Header = () => {
   return (
     <>
       <header
-        className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 transition-colors duration-300 ${
-          scrolled ? "bg-gray-800" : "bg-transparent"
+        className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+          scrolled === null
+            ? ""
+            : scrolled
+            ? "bg-[rgba(255,255,255,0.56)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-md"
+            : "bg-transparent"
         }`}
       >
         {/* Logo */}
