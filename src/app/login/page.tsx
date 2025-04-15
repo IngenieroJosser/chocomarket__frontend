@@ -211,8 +211,14 @@ const LoginPage = () => {
 
       {/* Modal para recuperación de contraseña */}
       {modalForgotPassword && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
+          onClick={() => setModalForgotPassword(false)}
+        >
+          <div 
+            className="bg-white dark:bg-gray-900 shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-6">
               Recuperar contraseña
             </h3>
@@ -230,14 +236,14 @@ const LoginPage = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-[#008060] focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-300"
+                className="w-full py-2 px-4 bg-[#008060] cursor-pointer hover:bg-[rgb(0,128,96,.9)] text-white font-semibold transition duration-300"
               >
                 Enviar OTP
               </button>
@@ -248,8 +254,14 @@ const LoginPage = () => {
 
       {/* Modal para verificar OTP */}
       {modalVerifyOtp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
+          onClick={() => setModalForgotPassword(false)}
+        >
+          <div 
+            className="bg-white dark:bg-gray-900 shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-6">
               Verificar OTP
             </h3>
@@ -267,14 +279,14 @@ const LoginPage = () => {
                   type="text"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-300"
+                className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded transition duration-300"
               >
                 Verificar
               </button>
@@ -285,25 +297,33 @@ const LoginPage = () => {
 
       {/* Modal para actualizar contraseña */}
       {modalUpdatePassword && (
-        <div className="modal flex flex-col justify-center items-center h-64 text-gray-500">
-          <form onSubmit={handleUpdatePassword}>
-            <h3>Actualizar Contraseña</h3>
-            <Input
-              label="Nueva contraseña"
-              name="newPassword"
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <Input
-              label="Confirmar contraseña"
-              name="confirmPassword"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button type="submit">Cambiar contraseña</button>
-          </form>
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
+          onClick={() => setModalForgotPassword(false)}
+        >
+          <div 
+            className="modal flex flex-col justify-center items-center h-64 text-gray-500"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <form onSubmit={handleUpdatePassword}>
+              <h3>Actualizar Contraseña</h3>
+              <Input
+                label="Nueva contraseña"
+                name="newPassword"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <Input
+                label="Confirmar contraseña"
+                name="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button type="submit">Cambiar contraseña</button>
+            </form>
+          </div>
         </div>
       )}
     </>
