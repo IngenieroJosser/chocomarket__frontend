@@ -274,9 +274,7 @@ const Header = () => {
             </ul>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">
-                Hola, {userName}
-              </span>
+              <span className="glow-text uppercase">Hola, {userName}</span>
               <button
                 onClick={handleLogout}
                 className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
@@ -423,9 +421,8 @@ const Header = () => {
             {isLoggedIn && (
               <>
                 <div className="mb-4 text-center flex flex-col gap-6">
-                  <span className="font-medium text-[#008060]">
-                    Hola, {userName}
-                  </span>
+                  <span className="glow-text uppercase">Hola, {userName}</span>
+
                   <button
                     onClick={handleLogout}
                     className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
