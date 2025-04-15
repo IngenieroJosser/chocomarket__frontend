@@ -109,12 +109,8 @@ const Header = () => {
   return (
     <>
       <header
-        className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
-          scrolled === null
-            ? ""
-            : scrolled
-            ? "bg-[rgba(255,255,255,0.56)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-md"
-            : "bg-transparent"
+        className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 transition-colors duration-300 ${
+          scrolled ? "bg-gray-800" : "bg-transparent"
         }`}
       >
         {/* Logo */}
@@ -130,7 +126,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation - Hidden on mobile */}
-        <nav className="hidden md:flex items-center gap-14 justify-between">
+        <nav className="hidden md:flex items-center gap-14">
           <ul className="flex flex-row gap-2">
             <li>
               <Link
@@ -530,7 +526,7 @@ const Header = () => {
                       {cartItems
                         .reduce((sum, item) => sum + item.price, 0)
                         .toFixed(2)}{" "}
-                      CAD
+                      COP
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 mb-6">
