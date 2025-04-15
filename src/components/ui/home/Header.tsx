@@ -317,6 +317,7 @@ const Header = () => {
             </svg>
 
             <svg
+              onClick={toggleCart}
               className="icon icon-cart"
               width="24"
               height="24"
@@ -446,6 +447,7 @@ const Header = () => {
 
             <div className="flex items-center gap-4">
               <svg
+                onClick={toggleDarkMode}
                 className="icon icon-dark-mode"
                 width="24"
                 height="24"
