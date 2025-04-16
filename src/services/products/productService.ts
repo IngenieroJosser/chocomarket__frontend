@@ -55,7 +55,7 @@ export interface Product {
   isFeatured: boolean;
   isVisible: boolean;
   tags: Tag[];
-  user: User; // ← asegúrate de que esté aquí
+  user: User;
   createdAt: string;
   updatedAt: string;
 }
@@ -81,7 +81,7 @@ export async function updateProduct(slug: string, updateData: UpdateProductData)
 }
 
 export async function findAProductBySlug(slug: string): Promise<ProductResponse> {
-  return await apiRequest<ProductResponse>('POST', `${baseUrl}/products/${slug}`);
+  return await apiRequest<ProductResponse>('GET', `${baseUrl}/products/${slug}`);
 }
 
 export async function findAllProduct(): Promise<ProductListResponse> {
