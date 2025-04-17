@@ -1,43 +1,12 @@
 import { apiRequest } from "@/lib/api";
-
-export interface RegisterData {
-  name: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  password: string;
-}
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
-
-export interface ForgotPasswordData {
-  email: string;
-}
-
-export interface ResetPasswordData {
-  email: string;
-  newPassword: string;
-}
-
-export interface VerifyOtpData {
-  email: string;
-  otp: string;
-}
-
-export interface AuthResponse {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    phoneNumber: string;
-    address: string;
-    role: 'SELLER' | 'ADMIN' | 'BUYER';
-  };
-}
+import { 
+  RegisterData, 
+  AuthResponse, 
+  LoginData, 
+  ForgotPasswordData, 
+  VerifyOtpData, 
+  ResetPasswordData 
+} from "@/types/interfaces";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 

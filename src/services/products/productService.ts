@@ -1,74 +1,10 @@
 import { apiRequest } from "@/lib/api";
-
-export interface CreateProductData {
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  imageUrl?: string;
-  status: string;
-  category: string;
-  discount?: number;
-  discountEnd?: Date;
-  isFeatured?: boolean;
-  isVisible?: boolean;
-  tags: string[];
-}
-
-export interface UpdateProductData {
-  name?: string;
-  description?: string;
-  price?: number;
-  stock?: number;
-  imageUrl?: string;
-  status?: string;
-  category?: string;
-  discount?: number;
-  discountEnd?: Date;
-  isFeatured?: boolean;
-  isVisible?: boolean;
-  tags?: string[];
-}
-
-export interface Tag {
-  id: number;
-  name: string;
-}
-
-export interface User {
-  id: number;
-  email: string;
-}
-
-export interface Product {
-  id: number;
-  slug: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  imageUrl?: string;
-  status: string;
-  category: string;
-  discount?: number;
-  discountEnd?: Date;
-  isFeatured: boolean;
-  isVisible: boolean;
-  tags: Tag[];
-  user: User;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ProductResponse {
-  message: string;
-  product: Product;
-}
-
-export interface ProductListResponse {
-  message: string;
-  products: Product[];
-}
+import { 
+  ProductListResponse, 
+  CreateProductData, 
+  ProductResponse, 
+  UpdateProductData 
+} from "@/types/interfaces";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
