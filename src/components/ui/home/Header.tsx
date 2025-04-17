@@ -276,6 +276,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <span className="glow-text uppercase">Hola, {userName}</span>
               <button
+                aria-label="Botón para cerrar sesión"
                 onClick={handleLogout}
                 className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
               >
@@ -340,6 +341,7 @@ const Header = () => {
           </div>
 
           <button
+            aria-label="Botón de menú para abrir más contenido"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 focus:outline-none"
           >
@@ -424,6 +426,7 @@ const Header = () => {
                   <span className="glow-text uppercase">Hola, {userName}</span>
 
                   <button
+                    aria-label="Botón de cerrar sesión"
                     onClick={handleLogout}
                     className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-sm border-b-2 border-transparent hover:border-red-500"
                   >
@@ -479,6 +482,7 @@ const Header = () => {
                 Mi Carrito ({cartItems.length})
               </h2>
               <button
+                aria-label="Botón para cerrar el modal de contenido del carrito de compras"
                 onClick={toggleCart}
                 className="text-2xl hover:text-gray-600"
               >
@@ -512,6 +516,7 @@ const Header = () => {
                           </p>
                         </div>
                         <button
+                          aria-label="Botón para eliminar algunos productos del carrito de compras"
                           onClick={() => removeItem(item.id)}
                           className="bg-red-600 border-b-2 p-3 text-white hover:font-bold text-sm cursor-pointer transition-all duration-300"
                         >
@@ -537,11 +542,12 @@ const Header = () => {
                     Impuestos incluidos y envío calculado al finalizar
                   </p>
 
-                  <button className="w-full bg-[#008060] cursor-pointer text-white py-3 rounded hover:bg-[#00694d] transition-colors">
+                  <button aria-label="Botón para finalizar compras" className="w-full bg-[#008060] cursor-pointer text-white py-3 rounded hover:bg-[#00694d] transition-colors">
                     Finalizar Compra
                   </button>
 
                   <button
+                    aria-label="Botón para seguir comprando"
                     onClick={toggleCart}
                     className="w-full mt-4 text-[#008060] cursor-pointer hover:text-[#00694d] underline"
                   >

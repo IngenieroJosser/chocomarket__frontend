@@ -85,6 +85,7 @@ const Footer = () => {
                 className="flex-1 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               <button
+                aria-label="Botón para suscribirse para que le lleguen novedades al correo"
                 type="submit"
                 className="px-4 py-2 bg-gray-900 text-white text-sm rounded-lg hover:bg-gray-800 transition-colors"
               >

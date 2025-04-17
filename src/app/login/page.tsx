@@ -185,6 +185,7 @@ const LoginPage = () => {
 
           <div className="flex items-center justify-between">
             <button
+              aria-label="Botón de iniciar sesión"
               type="submit"
               disabled={loading}
               className="bg-[#008060] text-white px-4 cursor-pointer py-2 rounded hover:bg-[#006748]"
@@ -192,6 +193,7 @@ const LoginPage = () => {
               {loading ? "Cargando..." : "Iniciar sesión"}
             </button>
             <button
+              aria-label="Botón para abrir el contenido flotante de olvidar contraseña"
               type="button"
               onClick={() => setModalForgotPassword(true)}
               className="text-sm text-[#075743] cursor-pointer hover:underline"
@@ -242,6 +244,7 @@ const LoginPage = () => {
               </div>
 
               <button
+                aria-label="Botón para enviar el OTP (código de verificación)"
                 type="submit"
                 className="w-full py-2 px-4 bg-[#008060] cursor-pointer hover:bg-[rgb(0,128,96,.9)] text-white font-semibold transition duration-300"
               >
@@ -285,6 +288,7 @@ const LoginPage = () => {
               </div>
 
               <button
+                aria-label="Botón para verificar el OTP (código de verificación)"
                 type="submit"
                 className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded transition duration-300"
               >
@@ -321,7 +325,7 @@ const LoginPage = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button type="submit">Cambiar contraseña</button>
+              <button type="submit" aria-label="Botón de cambiar contraseña">Cambiar contraseña</button>
             </form>
           </div>
         </div>

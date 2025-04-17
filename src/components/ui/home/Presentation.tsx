@@ -40,7 +40,7 @@ const Presentation = () => {
           <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center text-white p-6">
             <div className="text-center">
               <h2 className="text-2xl font-bold mb-4">{imagesPresentation[0].title}</h2>
-              <button className="bg-white cursor-pointer text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">Ver más</button>
+              <button aria-label="Botón para ver información" className="bg-white cursor-pointer text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">Ver más</button>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ const Presentation = () => {
             <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center text-white p-4">
               <div className="text-center">
                 <h2 className="text-xl font-semibold mb-2">{imagesPresentation[index].title}</h2>
-                <button className="bg-white cursor-pointer text-black px-3 py-1 rounded hover:bg-gray-200 transition">Ver más</button>
+                <button aria-label="Botón para ver información" className="bg-white cursor-pointer text-black px-3 py-1 rounded hover:bg-gray-200 transition">Ver más</button>
               </div>
             </div>
           </div>

@@ -37,6 +37,7 @@ export default function NotFoundPage() {
             className="border-2 cursor-pointer border-[#008060] text-[#008060] px-6 py-3 rounded-lg text-lg font-semibold shadow-lg hover:bg-[#008060] hover:text-white transition-all"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label="Botón de volver a la página de inicio"
           >
             Volver al inicio
           </motion.button>
