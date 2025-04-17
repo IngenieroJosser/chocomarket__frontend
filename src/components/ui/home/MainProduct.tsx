@@ -63,6 +63,7 @@ const MainProduct = () => {
                 className="w-full h-96 object-cover"
               />
               <button
+                aria-label="Botón para seleccionar el producto y ver vista previa de él"
                 onClick={() => setSelectedProduct(product)}
                 className="cursor-pointer absolute inset-0 flex items-center justify-center bg-[rgba(0,0,0,.6)] text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
               >
@@ -87,6 +88,7 @@ const MainProduct = () => {
           <div className="bg-white shadow-lg p-12 max-w-md w-full animate-fade-in">
             <div className="relative">
               <button
+                aria-label="Botón de modal para cerrar el contenido del producto seleccionado"
                 onClick={() => setSelectedProduct(null)}
                 className=" cursor-pointer absolute top-2 right-2 text-[#ff0000] w-8 h-8 flex items-center justify-center font-bold hover:bg-red-300 transition"
               >

@@ -109,6 +109,7 @@ const SellersPage = () => {
         )}
 
         <button
+          aria-label="Botón de registro para vendedores"
           type="submit"
           disabled={loading}
           className="w-full bg-[#008060] text-white py-3 rounded cursor-pointer font-semibold shadow-md transition duration-300 ease-in-out hover:bg-[#00694d] hover:shadow-xl"

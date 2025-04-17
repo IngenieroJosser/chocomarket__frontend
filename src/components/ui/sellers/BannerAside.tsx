@@ -38,6 +38,7 @@ const BannerAside = () => {
         {menuItems.map((item, index) => (
           <div key={index}>
             <button
+              aria-label="Botón para ver información sobre el menú del item"
               onClick={() => toggleTab(index)}
               className="w-full text-left flex justify-between items-center text-[#005f4a] font-semibold hover:text-[#004a38] transition duration-200"
             >
