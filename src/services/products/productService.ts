@@ -4,7 +4,7 @@ import {
   CreateProductData, 
   ProductResponse, 
   UpdateProductData 
-} from "@/types/interfaces";
+} from "@/types/typeDefinition";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
