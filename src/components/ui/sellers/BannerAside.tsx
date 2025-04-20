@@ -1,27 +1,44 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 type MenuItem = {
   title: string;
-  children: string[];
+  children: {
+    label: string;
+    path: string;
+  }[];
 };
 
 const menuItems: MenuItem[] = [
   {
     title: "Productos",
-    children: ["Agregar Producto", "Mis Productos", "Categorías"],
+    children: [
+      { label: "Agregar Producto", path: "/shop/add" },
+      { label: "Mis Productos", path: "/shop/all-product" },
+      { label: "Categorías", path: "/shop/categories" },
+    ],
   },
   {
     title: "Pedidos",
-    children: ["Pedidos Recibidos", "Historial de Pedidos"],
+    children: [
+      { label: "Pedidos Recibidos", path: "/orders/received" },
+      { label: "Historial de Pedidos", path: "/orders/history" },
+    ],
   },
   {
     title: "Finanzas",
-    children: ["Resumen de Ventas", "Mis Ingresos"],
+    children: [
+      { label: "Resumen de Ventas", path: "/finance/summary" },
+      { label: "Mis Ingresos", path: "/finance/earnings" },
+    ],
   },
   {
     title: "Configuración",
-    children: ["Perfil", "Preferencias"],
+    children: [
+      { label: "Perfil", path: "/settings/profile" },
+      { label: "Preferencias", path: "/settings/preference" },
+    ],
   },
 ];
 
@@ -87,11 +104,13 @@ const BannerAside = () => {
             >
               <ul className="pl-4 text-sm text-[#005f4a80] space-y-2">
                 {item.children.map((child, i) => (
-                  <li
-                    key={i}
-                    className="cursor-pointer hover:text-[#005f4a] transition"
-                  >
-                    {child}
+                  <li key={i}>
+                    <Link
+                      href={child.path}
+                      className="block cursor-pointer hover:text-[#005f4a] transition"
+                    >
+                      {child.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
