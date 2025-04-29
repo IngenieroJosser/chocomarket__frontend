@@ -1,5 +1,5 @@
 'use client';
-import { AuthRoute } from '@/components/AuthRoute';
+import { AuthRoute } from '@/lib/AuthRoute'
 import Header from '@/components/ui/home/Header';
 
 export default function AdminDashboard() {

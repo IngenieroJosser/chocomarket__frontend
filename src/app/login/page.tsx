@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Input } from "@/components/Input";
 import { Alert } from "@/components/Alert";
+import { ButtonImg } from "@/components/ButtonImg";
 import {
   userAuthenticated,
   forgotPassword,
@@ -13,6 +14,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { signIn, useSession } from "next-auth/react";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -148,6 +150,7 @@ const LoginPage = () => {
   return (
     <>
       <section className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br px-4 animate-fade-in">
+        {/* Imagen del login */}
         <div className="mb-6 md:mb-0 md:mr-12 transition-all duration-700 ease-in-out transform hover:scale-105">
           <Image
             src="/presentation-img4.webp"
@@ -158,66 +161,100 @@ const LoginPage = () => {
           />
         </div>
 
-        <form
-          onSubmit={handleSubmitLogin}
-          className="w-full max-w-md p-8 md:p-8 space-y-4 transition-all duration-700 ease-in-out transform hover:scale-[1.01]"
-        >
-          <h2 className="text-3xl font-extrabold text-[#008060] cursor-pointer text-center uppercase">
-            Inicia sesión
-          </h2>
+        {/* Formulario de login */}
+        <div className="w-full max-w-md flex flex-col items-center">
+          <form
+            onSubmit={handleSubmitLogin}
+            className="w-full p-8 space-y-4 transition-all duration-700 ease-in-out transform hover:scale-[1.01]"
+          >
+            <h2 className="text-3xl font-extrabold text-[#008060] cursor-pointer text-center uppercase">
+              Inicia sesión
+            </h2>
 
-          <Input
-            label="Correo electrónico"
-            name="email"
-            type="email"
-            value={formDataLogin.email}
-            onChange={handleChange}
-          />
-          <Input
-            label="Contraseña"
-            name="password"
-            type="password"
-            value={formDataLogin.password}
-            onChange={handleChange}
-          />
+            <Input
+              label="Correo electrónico"
+              name="email"
+              type="email"
+              value={formDataLogin.email}
+              onChange={handleChange}
+            />
+            <Input
+              label="Contraseña"
+              name="password"
+              type="password"
+              value={formDataLogin.password}
+              onChange={handleChange}
+            />
 
-          {error && <Alert type="error" message={error} />}
+            {error && <Alert type="error" message={error} />}
 
-          <div className="flex items-center justify-between">
-            <button
-              aria-label="Botón de iniciar sesión"
-              type="submit"
-              disabled={loading}
-              className="bg-[#008060] text-white px-4 cursor-pointer py-2 rounded hover:bg-[#006748]"
-            >
-              {loading ? "Cargando..." : "Iniciar sesión"}
-            </button>
-            <button
-              aria-label="Botón para abrir el contenido flotante de olvidar contraseña"
-              type="button"
-              onClick={() => setModalForgotPassword(true)}
-              className="text-sm text-[#075743] cursor-pointer hover:underline"
-            >
-              ¿Olvidaste tu contraseña?
-            </button>
+            <div className="flex items-center justify-between">
+              <button
+                aria-label="Botón de iniciar sesión"
+                type="submit"
+                disabled={loading}
+                className="bg-[#008060] text-white px-4 cursor-pointer py-2 rounded hover:bg-[#006748]"
+              >
+                {loading ? "Cargando..." : "Iniciar sesión"}
+              </button>
+              <button
+                aria-label="Botón para abrir el contenido flotante de olvidar contraseña"
+                type="button"
+                onClick={() => setModalForgotPassword(true)}
+                className="text-sm text-[#075743] cursor-pointer hover:underline"
+              >
+                ¿Olvidaste tu contraseña?
+              </button>
+            </div>
+
+            <p className="text-center text-sm">
+              ¿No tienes una cuenta?{" "}
+              <Link href="/register" className="text-[#004736] hover:underline">
+                Regístrate
+              </Link>
+            </p>
+          </form>
+
+          {/* Botón de login con Gmail - debajo del form */}
+          <div className="mt-4 flex justify-center w-full">
+            <ButtonImg
+              onClick={async () => {
+                // Inicia sesión con Google
+                const res = await signIn("google", { redirect: false });
+
+                // Espera unos milisegundos para que la sesión se actualice
+                setTimeout(async () => {
+                  const session = await getSession(); // O usa useSession() si estás en un componente
+                  if (session?.id_token) {
+                    // Enviar token a tu backend NestJS
+                    const response = await fetch(
+                      `${process.env.NEXT_PUBLIC_API_URL}/auth/google`,
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id_token: session.id_token }),
+                      }
+                    );
+
+                    const data = await response.json();
+                    console.log("Respuesta del backend:", data);
+                  }
+                }, 500);
+              }}
+              imageSrc="/gmail-auth.png"
+              imageAlt="Gmail"
+            />
           </div>
-
-          <p className="text-center text-sm">
-            ¿No tienes una cuenta?{" "}
-            <Link href="/register" className="text-[#004736] hover:underline">
-              Regístrate
-            </Link>
-          </p>
-        </form>
+        </div>
       </section>
 
       {/* Modal para recuperación de contraseña */}
       {modalForgotPassword && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
           onClick={() => setModalForgotPassword(false)}
         >
-          <div 
+          <div
             className="bg-white dark:bg-gray-900 shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn"
             onClick={(e) => e.stopPropagation()}
           >
@@ -257,11 +294,11 @@ const LoginPage = () => {
 
       {/* Modal para verificar OTP */}
       {modalVerifyOtp && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
           onClick={() => setModalForgotPassword(false)}
         >
-          <div 
+          <div
             className="bg-white dark:bg-gray-900 shadow-2xl p-8 w-full max-w-md mx-4 animate-fadeIn"
             onClick={(e) => e.stopPropagation()}
           >
@@ -301,11 +338,11 @@ const LoginPage = () => {
 
       {/* Modal para actualizar contraseña */}
       {modalUpdatePassword && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] bg-opacity-50 backdrop-blur-sm"
           onClick={() => setModalForgotPassword(false)}
         >
-          <div 
+          <div
             className="modal flex flex-col justify-center items-center h-64 text-gray-500"
             onClick={(e) => e.stopPropagation()}
           >
@@ -325,7 +362,9 @@ const LoginPage = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button type="submit" aria-label="Botón de cambiar contraseña">Cambiar contraseña</button>
+              <button type="submit" aria-label="Botón de cambiar contraseña">
+                Cambiar contraseña
+              </button>
             </form>
           </div>
         </div>

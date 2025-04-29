@@ -5,7 +5,7 @@ type BotonProps = {
   onClick: () => void;
 };
 
-const Button: React.FC<BotonProps> = ({ text, onClick }) => {
+export const Button: React.FC<BotonProps> = ({ text, onClick }) => {
   return (
     <button onClick={onClick} className="px-4 py-2 bg-[#008060] text-white rounded">
       {text}

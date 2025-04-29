@@ -3,12 +3,13 @@ import {
   ProductListResponse, 
   CreateProductData, 
   ProductResponse, 
-  UpdateProductData 
+  UpdateProductData, 
+  Product
 } from "@/types/typeDefinition";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
-export async function createProduct(dataProduct: CreateProductData): Promise<ProductResponse> {
+export async function createProduct(dataProduct: CreateProductData, id: number): Promise<ProductResponse> {
   return await apiRequest<ProductResponse>('POST', `${baseUrl}/products/`, dataProduct);
 }
 
@@ -20,8 +21,8 @@ export async function findAProductBySlug(slug: string): Promise<ProductResponse>
   return await apiRequest<ProductResponse>('GET', `${baseUrl}/products/${slug}`);
 }
 
-export async function findAllProduct(): Promise<ProductListResponse> {
-  return await apiRequest<ProductListResponse>('GET', `${baseUrl}/products/`);
+export async function findAllProduct(): Promise<Product[]> {
+  return await apiRequest<Product[]>('GET', `${baseUrl}/products/`);
 }
 
 export async function removeProduct(id: number): Promise<ProductResponse> {

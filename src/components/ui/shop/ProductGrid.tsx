@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { Product } from '@/services/products/productService';
+import { Product } from "@/types/typeDefinition";
+import Image from "next/image";
+import { normalizeImageUrl } from "@/helpers/url";
 
 type ProductGridProps = {
   products?: Product[];
 };
 
-function ProductGrid({ products }: ProductGridProps) {
-  if (!products?.length) {
+const ProductGrid = ({ products = [] }: ProductGridProps) => {
+  if (!products.length) {
     return (
       <div className="text-center py-10 text-gray-500">
-        No hay productos disponibles. 
+        No hay productos disponibles.
       </div>
     );
   }
@@ -23,7 +24,9 @@ function ProductGrid({ products }: ProductGridProps) {
           ? product.price * (1 - product.discount)
           : product.price;
 
-        const formattedCategory = product.category.replace(/_/g, ' ').toLowerCase();
+        const formattedCategory = product.category
+          .replace(/_/g, " ")
+          .toLowerCase();
 
         return (
           <div
@@ -37,11 +40,10 @@ function ProductGrid({ products }: ProductGridProps) {
             <div className="px-4">
               {product.imageUrl ? (
                 <Image
-                  src={product.imageUrl}
+                  src={normalizeImageUrl(product.imageUrl!)}
                   alt={product.name}
                   width={500}
                   height={300}
-                  className="w-full h-[300px] object-contain"
                 />
               ) : (
                 <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">
@@ -56,7 +58,9 @@ function ProductGrid({ products }: ProductGridProps) {
                   {product.name}
                 </h3>
 
-                <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  {product.description}
+                </p>
 
                 <p className="mt-2">
                   {product.discount ? (
@@ -79,7 +83,7 @@ function ProductGrid({ products }: ProductGridProps) {
               <div className="text-xs text-gray-500">
                 <span>Vendido por: </span>
                 <span className="font-medium text-gray-700">
-                  {product.user?.email || 'Desconocido'}
+                  {product.user?.email || "Desconocido"}
                 </span>
               </div>
 
@@ -94,8 +98,10 @@ function ProductGrid({ products }: ProductGridProps) {
                 ))}
               </div>
 
-              {product.status === 'INACTIVE' && (
-                <span className="text-xs text-red-500 mt-2">Este producto no está activo.</span>
+              {product.status === "INACTIVE" && (
+                <span className="text-xs text-red-500 mt-2">
+                  Este producto no está activo.
+                </span>
               )}
             </div>
           </div>
@@ -103,6 +109,6 @@ function ProductGrid({ products }: ProductGridProps) {
       })}
     </div>
   );
-}
+};
 
-export default ProductGrid
+export default ProductGrid;

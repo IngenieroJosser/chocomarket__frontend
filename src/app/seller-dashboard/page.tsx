@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AuthRoute } from "@/components/AuthRoute";
+import { AuthRoute } from "@/lib/AuthRoute";
 import BannerAside from "@/components/ui/sellers/BannerAside";
 import SellerContent from "@/components/ui/sellers/SellerContent";
 

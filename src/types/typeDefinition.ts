@@ -100,8 +100,8 @@ export interface Product {
   discountEnd?: Date;
   isFeatured: boolean;
   isVisible: boolean;
-  tags: Tag[];
-  user: User;
+  user?: { email: string };
+  tags?: { id: number; name: string }[];
   createdAt: string;
   updatedAt: string;
 }

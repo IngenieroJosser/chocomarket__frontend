@@ -2,25 +2,29 @@
 
 import { useEffect, useState } from "react";
 import { findAllProduct } from "@/services/products/productService";
-import { Product } from "@/services/products/productService";
-import ImagePresentation from "@/components/ui/shop/ImagePresentation"
-import ProductGrid from "@/components/ui/shop/ProductGrid"
+import { Product } from "@/types/typeDefinition";
+import ImagePresentation from "@/components/ui/shop/ImagePresentation";
+import ProductGrid from "@/components/ui/shop/ProductGrid";
 
 const ShopPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProducts = async () => {
+    async function loadProducts() {
       try {
-        const response = await findAllProduct();
-        setProducts(response.products ?? []);
+        const fetchProduct = await findAllProduct();
+        if (Array.isArray(fetchProduct)) {
+          setProducts(fetchProduct);
+        } else {
+          console.log('Respuesta inesperada:', fetchProduct);
+        }
       } catch (error) {
-        console.error('Error obteniendo los productos:', error);
+        console.log('Error cargando productos:', error);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     loadProducts();
   }, []);
