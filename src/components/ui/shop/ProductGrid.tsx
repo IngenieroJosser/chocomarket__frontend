@@ -40,15 +40,15 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
             <div className="px-4">
               {product.imageUrl ? (
                 <div className="relative w-full h-48 overflow-hidden rounded-2xl">
-                <Image
-                  src={normalizeImageUrl(product.imageUrl!)}
-                  alt={product.name}
-                  fill
-                  className="object-cover object-center" 
-                />
-              </div>
+                  <Image
+                    src={normalizeImageUrl(product.imageUrl!)}
+                    alt={product.name}
+                    fill
+                    className="object-cover object-center"
+                  />
+                </div>
               ) : (
-                <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">
+                <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">
                   No Image
                 </div>
               )}
@@ -68,10 +68,10 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                   {product.discount ? (
                     <>
                       <span className="line-through text-sm mr-2 text-[#ff0000]">
-                        ${product.price.toFixed(2)} CAD
+                        ${product.price.toFixed(2)} COP
                       </span>
                       <span className="text-[#008060] font-semibold">
-                        ${discountPrice.toFixed(2)} CAD
+                        ${discountPrice.toFixed(2)} COP
                       </span>
                     </>
                   ) : (
@@ -99,6 +99,8 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                   </span>
                 ))}
               </div>
+
+              <button className="px-1 py-2.5 bg-[#008060]/10 text-[#008060] rounded-full text-xs cursor-pointer hover:bg-[rgba(0,128,96,.3)]">Seleccionar</button>
 
               {product.status === "INACTIVE" && (
                 <span className="text-xs text-red-500 mt-2">
