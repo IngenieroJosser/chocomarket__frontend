@@ -31,7 +31,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
         return (
           <div
             key={product.id}
-            className="bg-white shadow-md rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+            className="bg-white shadow-md rounded overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
           >
             <div className="p-4 text-sm text-[#008060] uppercase tracking-wider font-semibold">
               {formattedCategory}
@@ -39,12 +39,14 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
 
             <div className="px-4">
               {product.imageUrl ? (
+                <div className="relative w-full h-48 overflow-hidden rounded-2xl">
                 <Image
                   src={normalizeImageUrl(product.imageUrl!)}
                   alt={product.name}
-                  width={500}
-                  height={300}
+                  fill
+                  className="object-cover object-center" 
                 />
+              </div>
               ) : (
                 <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">
                   No Image
@@ -74,7 +76,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                     </>
                   ) : (
                     <span className="text-[#008060] font-semibold">
-                      ${product.price.toFixed(2)} CAD
+                      ${product.price.toFixed(2)} COP
                     </span>
                   )}
                 </p>
