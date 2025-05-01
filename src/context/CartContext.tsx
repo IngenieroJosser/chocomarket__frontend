@@ -26,17 +26,14 @@ interface CartProviderProps {
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Product[]>([]);
 
-  // función para añadir un producto al carrito de compra
   const addToCart = (product: Product) => {
     setCart((prev: Product[]) => [...prev, product]);
   };
 
-  // función para remover un producto del carrito de compra
   const removeFromCart = (productId: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
+    setCart((removeProduct) => removeProduct.filter((item) => item.id !== productId));
   };
 
-  // función para mostrar un producto del carrito de compra
   const findProductFromCart = (productId: number) => {
     return cart.find((foundProduct) => foundProduct.id === productId);
   }

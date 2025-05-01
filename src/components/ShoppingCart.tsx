@@ -5,7 +5,6 @@ import { Product } from "@/types/typeDefinition";
 import { normalizeImageUrl } from "@/helpers/url";
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(true);
 
   const { cart, removeFromCart } = useCart();
