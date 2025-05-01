@@ -7,6 +7,8 @@ import { useDarkMode } from "@/hooks/useDarkMode";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import ShoppingCart from "@/components/ShoppingCart";
+import { useCart } from "@/context/CartContext";
+import { Product } from "@/types/typeDefinition";
 
 const Header = () => {
   const [language, setLanguage] = useState<string>("es");
@@ -16,32 +18,8 @@ const Header = () => {
   const { isDark, toggleDarkMode } = useDarkMode();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const router = useRouter();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Bay Armchair",
-      image: "/presentation-img3.webp",
-      price: 449.0,
-      color: "Green",
-      quantity: 3,
-    },
-    {
-      id: 2,
-      name: "Producto 2",
-      image: "/presentation-img2.webp",
-      price: 479.0,
-      color: "Blue",
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: "Producto3",
-      image: "/presentation-img1.webp",
-      price: 549.0,
-      color: "Green",
-      quantity: 7,
-    },
-  ]);
+  const { cart } = useCart();
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("Usuario");
 
@@ -99,6 +77,9 @@ const Header = () => {
     router.push("/");
     router.refresh();
   };
+
+  // Contexto para el carrito de compra
+  const { addToCart } = useCart();
 
   return (
     <>
@@ -473,7 +454,7 @@ const Header = () => {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold uppercase text-[#008060]">
-                Mi Carrito ({cartItems.length})
+                Mi Carrito ({cart.length})
               </h2>
               <button
                 aria-label="Botón para cerrar el modal de contenido del carrito de compras"
@@ -484,7 +465,7 @@ const Header = () => {
               </button>
             </div>
 
-            {cartItems.length === 0 ? (
+            {cart.length === 0 ? (
               <p className="text-center text-gray-500">Tu carrito está vacío</p>
             ) : (
               <>

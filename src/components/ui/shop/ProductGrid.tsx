@@ -3,6 +3,7 @@
 import { Product } from "@/types/typeDefinition";
 import Image from "next/image";
 import { normalizeImageUrl } from "@/helpers/url";
+import { useCart } from "@/context/CartContext";
 
 type ProductGridProps = {
   products?: Product[];
@@ -16,6 +17,9 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
       </div>
     );
   }
+
+  // Contexto para el carrito de compra
+  const { addToCart } = useCart();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 bg-[#f9f9f9]">
@@ -100,7 +104,12 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                 ))}
               </div>
 
-              <button className="px-1 py-2.5 bg-[#008060]/10 text-[#008060] rounded-full text-xs cursor-pointer hover:bg-[rgba(0,128,96,.3)]">Seleccionar</button>
+              <button 
+                className="px-1 py-2.5 bg-[#008060]/10 text-[#008060] rounded-full text-xs cursor-pointer hover:bg-[rgba(0,128,96,.3)]"
+                onClick={() => addToCart(product)}
+                >
+                  Seleccionar
+              </button>
 
               {product.status === "INACTIVE" && (
                 <span className="text-xs text-red-500 mt-2">
