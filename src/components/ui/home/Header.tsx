@@ -79,7 +79,7 @@ const Header = () => {
   };
 
   // Contexto para el carrito de compra
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
 
   return (
     <>
