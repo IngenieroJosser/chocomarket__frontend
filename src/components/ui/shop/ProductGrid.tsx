@@ -4,6 +4,7 @@ import { Product } from "@/types/typeDefinition";
 import Image from "next/image";
 import { normalizeImageUrl } from "@/helpers/url";
 import { useCart } from "@/context/CartContext";
+import { toast, Bounce } from "react-toastify";
 
 type ProductGridProps = {
   products?: Product[];
@@ -104,11 +105,30 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                 ))}
               </div>
 
-              <button 
+              <button
                 className="px-1 py-2.5 bg-[#008060]/10 text-[#008060] rounded-full text-xs cursor-pointer hover:bg-[rgba(0,128,96,.3)]"
-                onClick={() => addToCart(product)}
-                >
-                  Seleccionar
+                onClick={() => {
+                  toast.promise(
+                    new Promise<void>((resolve) => {
+                      addToCart(product);
+                      setTimeout(resolve, 1000);
+                    }),
+                    {
+                      pending: "Agregando al carrito...",
+                      success: "Producto agregado con éxito 💚",
+                      error: "Error al agregar el producto ❌",
+                    },
+                    {
+                      autoClose: 5000,
+                      transition: Bounce,
+                      progress: undefined,
+                      closeOnClick: true,
+                    }
+                  );
+                  
+                }}
+              >
+                Seleccionar
               </button>
 
               {product.status === "INACTIVE" && (
