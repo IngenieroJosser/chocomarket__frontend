@@ -13,7 +13,7 @@ const ShoppingCart = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
+  const toggleCart = () => setIsCartOpen(!isCartOpen); // Abre o cierra el carrito
 
   const handleRemove = (id: number) => {
     removeFromCart(id);
@@ -31,97 +31,95 @@ const ShoppingCart = () => {
 
   return (
     <>
-      {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-xl max-w-lg w-full">
-            {/* Lista de productos */}
-            <div className="space-y-4">
-              {cart.map((item: CartProduct) => (
-                <div key={item.id} className="border-b pb-4">
-                  <div className="flex justify-between items-start gap-4">
-                    <div>
-                      <Image
-                        src={normalizeImageUrl(item.imageUrl!)}
-                        width={200}
-                        height={200}
-                        alt={item.name}
-                      />
-                      <h3 className="font-semibold uppercase">{item.name}</h3>
-                      <p className="text-lg">${item.price.toFixed(2)} COP</p>
+      {/* Lista de productos */}
+      <div className="space-y-4">
+        {cart.map((item: CartProduct) => (
+          <div key={item.id} className="border-b pb-4">
+            <div className="flex justify-between items-start gap-4">
+              <div>
+                <Image
+                  src={normalizeImageUrl(item.imageUrl!)}
+                  width={200}
+                  height={200}
+                  alt={item.name}
+                />
+                <h3 className="font-semibold uppercase">{item.name}</h3>
+                <p className="text-lg">${item.price.toFixed(2)} COP</p>
 
-                      {/* Selector de cantidad */}
-                      <div className="flex items-center gap-2 mt-2">
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, Math.max((item.quantity || 1) - 1, 1))
-                          }
-                          className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
-                        >
-                          -
-                        </button>
-                        <span>{item.quantity || 1}</span>
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, (item.quantity || 1) + 1)
-                          }
-                          className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleRemove(item.id)}
-                      className="bg-red-600 border-b-2 p-3 text-white hover:font-bold text-sm cursor-pointer transition-all duration-300"
-                    >
-                      Eliminar
-                    </button>
-                  </div>
+                {/* Selector de cantidad */}
+                <div className="flex items-center gap-2 mt-2">
+                  <button
+                    onClick={() =>
+                      updateQuantity(
+                        item.id,
+                        Math.max((item.quantity || 1) - 1, 1)
+                      )
+                    }
+                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                  >
+                    -
+                  </button>
+                  <span>{item.quantity || 1}</span>
+                  <button
+                    onClick={() =>
+                      updateQuantity(item.id, (item.quantity || 1) + 1)
+                    }
+                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                  >
+                    +
+                  </button>
                 </div>
-              ))}
-            </div>
-
-            {/* Totales y acciones */}
-            <div className="mt-10 space-y-6">
-              <div className="flex justify-between items-center text-lg font-semibold">
-                <span>Subtotal:</span>
-                <span>${subtotal.toFixed(2)} COP</span>
               </div>
 
-              {/* Botones en columna */}
-              <div className="flex flex-col gap-4 items-stretch">
-                {/* Botón principal: Finalizar compra */}
-                <button
-                  className="w-full bg-[#008060] text-white py-3 px-6 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 hover:bg-[#00694d] shadow-md hover:shadow-lg"
-                  onClick={() => toast.info("Proceso de compra aún no implementado")}
-                >
-                  🛒 Finalizar Compra
-                </button>
-
-                {/* Botón secundario: Seguir comprando */}
-                <button
-                  onClick={toggleCart}
-                  className="w-full bg-[#E5F2EF] text-[#008060] py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-105 hover:bg-[#d3ece5] shadow-sm hover:shadow-md"
-                >
-                  🛍️ Seguir Comprando
-                </button>
-
-                {/* Botón de advertencia: Vaciar carrito */}
-                <button
-                  onClick={() => {
-                    clearCart();
-                    toast.success("Carrito vaciado");
-                  }}
-                  className="w-full bg-red-100 text-red-700 py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-105 hover:bg-red-200 shadow-sm hover:shadow-md"
-                >
-                  🗑️ Vaciar Carrito
-                </button>
-              </div>
+              <button
+                onClick={() => handleRemove(item.id)}
+                className="bg-red-600 border-b-2 p-3 text-white hover:font-bold text-sm cursor-pointer transition-all duration-300"
+              >
+                Eliminar
+              </button>
             </div>
           </div>
+        ))}
+      </div>
+
+      {/* Totales y acciones */}
+      <div className="mt-10 space-y-6">
+        <div className="flex justify-between items-center text-lg font-semibold">
+          <span>Subtotal:</span>
+          <span>${subtotal.toFixed(2)} COP</span>
         </div>
-      )}
+
+        {/* Botones con nuevo estilo y disposición */}
+        <div className="mt-8 space-y-4">
+          {/* Botón principal centrado */}
+          <button
+            className="w-full cursor-pointer bg-green-600 text-white py-3 px-6 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-green-700 shadow-md"
+            onClick={() => toast.info("Proceso de compra aún no implementado")}
+          >
+            🛒 Finalizar Compra
+          </button>
+
+          {/* Botones secundarios en fila */}
+          <div className="flex flex-wrap gap-4 justify-between">
+            <button
+              onClick={toggleCart}
+              className="cursor-pointer flex-1 border border-green-600 text-green-700 bg-white py-2 px-4 rounded-xl transition-all hover:bg-green-50 font-medium"
+            >
+              🛍️ Seguir Comprando
+            </button>
+
+            <button
+              onClick={() => {
+                clearCart();
+                toast.success("Carrito vaciado");
+              }}
+              className="cursor-pointer flex-1 border border-red-500 text-red-600 bg-white py-2 px-4 rounded-xl transition-all hover:bg-red-50 font-medium"
+            >
+              🗑️ Vaciar Carrito
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
