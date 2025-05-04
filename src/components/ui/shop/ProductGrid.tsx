@@ -119,7 +119,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                       error: "Error al agregar el producto ❌",
                     },
                     {
-                      autoClose: 5000,
+                      autoClose: 2000,
                       transition: Bounce,
                       progress: undefined,
                       closeOnClick: true,

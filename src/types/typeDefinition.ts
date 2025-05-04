@@ -125,3 +125,7 @@ export interface ProductListResponse {
   message: string;
   products: Product[];
 }
+
+export interface CartProduct extends Product {
+  quantity: number;
+}

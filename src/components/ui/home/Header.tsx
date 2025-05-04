@@ -454,7 +454,7 @@ const Header = () => {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold uppercase text-[#008060]">
-                Mi Carrito ({cart.length})
+                Carrito ({cart.length})
               </h2>
               <button
                 aria-label="Botón para cerrar el modal de contenido del carrito de compras"
