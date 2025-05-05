@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Product } from "@/types/typeDefinition";
 import Image from "next/image";
@@ -54,7 +54,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                 </div>
               ) : (
                 <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">
-                  No Image
+                  Sin imagen disponible
                 </div>
               )}
             </div>
