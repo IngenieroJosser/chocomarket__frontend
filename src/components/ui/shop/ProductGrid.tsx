@@ -23,7 +23,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
   const { addToCart } = useCart();
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 bg-[#f9f9f9]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {products.map((product) => {
         const discountPrice = product.discount
           ? product.price * (1 - product.discount)

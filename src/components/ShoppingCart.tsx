@@ -6,14 +6,14 @@ import { normalizeImageUrl } from "@/helpers/url";
 import { toast } from "sonner";
 
 const ShoppingCart = () => {
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(true); // Si el carrito está abierto
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(true);
   const { cart, removeFromCart, clearCart, updateQuantity } = useCart();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const toggleCart = () => setIsCartOpen(!isCartOpen); // Abre o cierra el carrito
+  const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   const handleRemove = (id: number) => {
     removeFromCart(id);
@@ -31,7 +31,6 @@ const ShoppingCart = () => {
 
   return (
     <>
-      {/* Lista de productos */}
       <div className="space-y-4">
         {cart.map((item: CartProduct) => (
           <div key={item.id} className="border-b pb-4">
