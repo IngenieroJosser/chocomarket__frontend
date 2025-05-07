@@ -5,13 +5,32 @@ import Image from "next/image";
 import { normalizeImageUrl } from "@/helpers/url";
 import { useCart } from "@/context/CartContext";
 import { toast, Bounce } from "react-toastify";
+import { useMemo } from "react";
 
 type ProductGridProps = {
   products?: Product[];
 };
 
+// Función para mezclar array (Fisher-Yates algorithm)
+const shuffleArray = (array: Product[]) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const ProductGrid = ({ products = [] }: ProductGridProps) => {
-  if (!products.length) {
+  const { addToCart } = useCart();
+
+  // Mezclar productos solo cuando cambie el array original
+  const shuffledProducts = useMemo(
+    () => shuffleArray(products),
+    [products] // Solo se recalcula cuando cambia products
+  );
+
+  if (!shuffledProducts.length) {
     return (
       <div className="text-center py-10 text-gray-500">
         No hay productos disponibles.
@@ -19,12 +38,9 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
     );
   }
 
-  // Contexto para el carrito de compra
-  const { addToCart } = useCart();
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-      {products.map((product) => {
+      {shuffledProducts.map((product) => {
         const discountPrice = product.discount
           ? product.price * (1 - product.discount)
           : product.price;

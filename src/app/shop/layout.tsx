@@ -8,12 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function ShopLayout({ children }: { children: ReactNode }) {
   return (
     <CartProvider>
-      <div className="min-h-screen flex flex-col">
+      <section className="min-h-screen flex flex-col">
         <ToastContainer />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-      </div>
+      </section>
     </CartProvider>
   );
 }

@@ -7,8 +7,6 @@ import {
   VerifyOtpData,
   ResetPasswordData
 } from "@/types/typeDefinition";
-import GoogleProvider from "next-auth/providers/google"
-import { NextAuthOptions } from "next-auth"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
 
@@ -34,28 +32,4 @@ export async function verifyOtp(dataVerifyOtp: VerifyOtpData): Promise<GenericMe
 
 export async function resetPassword(dataResetPassword: ResetPasswordData): Promise<GenericMessageResponse> {
   return await apiRequest<GenericMessageResponse>('POST', `${baseUrl}/auth/reset-password`, dataResetPassword);
-}
-
-
-// Authentication with Google
-export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, account }) {
-      if (account?.id_token) {
-        token.id_token = account.id_token
-      }
-      return token
-    },
-    async session({ session, token }) {
-      session.id_token = token.id_token
-      return session
-    },
-  },
-  secret: process.env.NEXTAUTH_SECRET,
 }

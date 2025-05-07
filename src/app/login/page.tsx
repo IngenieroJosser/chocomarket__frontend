@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { signIn, useSession } from "next-auth/react";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -218,29 +217,7 @@ const LoginPage = () => {
           {/* Botón de login con Gmail - debajo del form */}
           <div className="mt-4 flex justify-center w-full">
             <ButtonImg
-              onClick={async () => {
-                // Inicia sesión con Google
-                const res = await signIn("google", { redirect: false });
-
-                // Espera unos milisegundos para que la sesión se actualice
-                setTimeout(async () => {
-                  const session = await getSession(); // O usa useSession() si estás en un componente
-                  if (session?.id_token) {
-                    // Enviar token a tu backend NestJS
-                    const response = await fetch(
-                      `${process.env.NEXT_PUBLIC_API_URL}/auth/google`,
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ id_token: session.id_token }),
-                      }
-                    );
-
-                    const data = await response.json();
-                    console.log("Respuesta del backend:", data);
-                  }
-                }, 500);
-              }}
+              onClick={() => {'google'}}
               imageSrc="/gmail-auth.png"
               imageAlt="Gmail"
             />

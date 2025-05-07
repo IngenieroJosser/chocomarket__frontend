@@ -129,3 +129,12 @@ export interface ProductListResponse {
 export interface CartProduct extends Product {
   quantity: number;
 }
+
+export interface User {
+  name: string;
+  email: string;
+  image?: string;
+  googleId?: string;
+  oauthProvider?: string;
+  role?: 'SELLER' | 'ADMIN' | 'BUYER';
+}

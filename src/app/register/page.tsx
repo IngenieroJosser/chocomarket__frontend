@@ -29,10 +29,10 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
   
     try {
-      const response = await registerUser(formData);
+      await registerUser(formData);
       localStorage.setItem('userRole', formData.name);
       toast.success(`Registro exitoso. ¡Bienvenid@! ${formData.name}`);
       router.push('/login');
