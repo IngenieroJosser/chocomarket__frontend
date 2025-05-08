@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { PageLoader } from "@/components/PageLoader";
 import { Toaster } from 'react-hot-toast';
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +25,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased`}
       >
-        <PageLoader />
-        {children}
-        <Toaster position="top-right" reverseOrder={false} />
+        <CartProvider>
+          <PageLoader />
+          {children}
+          <Toaster position="top-right" reverseOrder={false} />
+        </CartProvider>
       </body>
     </html>
   );
