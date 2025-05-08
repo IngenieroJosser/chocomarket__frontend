@@ -89,7 +89,7 @@ const Header = () => {
             ? ""
             : scrolled
             ? "bg-[rgba(255,255,255,0.56)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-md"
-            : "text-white font-bold"
+            : ""
         }`}
       >
         {/* Logo */}
