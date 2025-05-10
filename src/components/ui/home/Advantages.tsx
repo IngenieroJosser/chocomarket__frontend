@@ -38,11 +38,7 @@ const Advantages = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 
-                className={`mt-2 font-bold transition-colors uppercase text-end duration-300 ${
-                  advantage.linkText === "Contáctanos"
-                    ? "text-emerald-950 hover:text-emerald-900"
-                    : "text-emerald-800 hover:text-emerald-700"
-                }`}
+                className="mt-2 font-bold transition-colors uppercase text-end duration-300"
               >
                 {advantage.linkText}
               </a>
