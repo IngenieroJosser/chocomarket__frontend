@@ -84,7 +84,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`flex items-center justify-between p-6 border-b fixed top-0 w-full z-50 border-black px-4 md:px-14 transition-colors duration-300 ${
+        className={`flex items-center justify-between p-6 fixed top-0 w-full z-50 px-4 md:px-14 transition-colors duration-300 ${
           scrolled === null
             ? ""
             : scrolled
