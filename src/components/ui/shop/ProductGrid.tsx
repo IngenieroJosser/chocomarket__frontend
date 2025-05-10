@@ -52,7 +52,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
         return (
           <div
             key={product.id}
-            className="bg-white shadow-md rounded overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
+            className="shadow-md rounded overflow-hidden flex flex-col transition-transform hover:scale-[1.01]"
           >
             <div className="p-4 text-sm text-[#008060] uppercase tracking-wider font-semibold">
               {formattedCategory}
