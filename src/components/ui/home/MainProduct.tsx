@@ -84,8 +84,8 @@ const MainProduct = () => {
 
       {/* Modal */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-[rgba(0,0,0,.6)] bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white shadow-lg p-12 max-w-md w-full animate-fade-in">
+        <div className="max-w-full fixed inset-0 bg-[rgba(0,0,0,.6)] bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white shadow-lg rounded-xl p-12 max-w-2xl w-full animate-fade-in">
             <div className="relative">
               <button
                 aria-label="Botón de modal para cerrar el contenido del producto seleccionado"
@@ -97,17 +97,17 @@ const MainProduct = () => {
               <img
                 src={selectedProduct.img}
                 alt={selectedProduct.name}
-                className="w-dvw h-96 object-cover mb-4"
+                className="w-dvw h-96 object-cover mb-4 rounded"
               />
-              <h2 className="text-2xl uppercase font-bold text-[#008060] mb-2">
+              <h2 className="text-2xl uppercase text-[#008060] mb-2">
                 {selectedProduct.name}
               </h2>
-              <p className="text-[#5A3E29] font-medium mb-2">
-                {selectedProduct.price}
-              </p>
               <p className="text-sm text-gray-600">
                 Este es un producto de excelente calidad, ideal para tu espacio
                 de trabajo o descanso. Disponible por tiempo limitado.
+              </p>
+              <p className="bg-[#008060] text-[#ffffff] rounded-full text-2xl font-bold mt-6 text-center">
+                {selectedProduct.price}
               </p>
             </div>
           </div>
