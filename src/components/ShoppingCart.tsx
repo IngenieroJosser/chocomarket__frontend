@@ -26,7 +26,7 @@ const ShoppingCart = () => {
   );
 
   if (cart.length === 0) {
-    return <p className="text-center">Tu carrito está vacío</p>;
+    return <p>Tu carrito está vacío</p>;
   }
 
   return (

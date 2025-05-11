@@ -460,23 +460,14 @@ const Header = () => {
               <button
                 aria-label="Botón para cerrar el modal de contenido del carrito de compras"
                 onClick={toggleCart}
-                className="text-2xl hover:text-gray-600"
+                className="text-2xl text-[#ff0000] cursor-pointer"
               >
                 &times;
               </button>
             </div>
 
             {cart.length === 0 ? (
-              <div className="flex flex-row-reverse justify-between mt-5">
-                <button 
-                  aria-label="Cerrar modal del carrito de compra"
-                  className="text-[#ff0000] cursor-pointer"
-                  onClick={() => setIsCartOpen(false)}
-                >
-                  X
-                </button>
-                <p className="text-center text-gray-500">Tu carrito está vacío</p>
-              </div>
+                <p className="text-gray-500">Tu carrito está vacío</p>
             ) : (
               <>
                 <ShoppingCart />
