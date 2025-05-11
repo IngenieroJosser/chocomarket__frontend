@@ -250,7 +250,7 @@ const Header = () => {
             </ul>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="glow-text uppercase">Hola, {userName}</span>
+              <span className="text-[#008060]">Hola, {userName}</span> {/* glow-text color verde resaltado: glow-text */}
               <button
                 aria-label="Botón para cerrar sesión"
                 onClick={handleLogout}
@@ -399,7 +399,7 @@ const Header = () => {
             {isLoggedIn && (
               <>
                 <div className="mb-4 text-center flex flex-col gap-6">
-                  <span className="glow-text uppercase">Hola, {userName}</span>
+                  <span className="text-[#008060]">Hola, {userName}</span> {/* glow-text color verde resaltado: glow-text */}
 
                   <button
                     aria-label="Botón de cerrar sesión"
