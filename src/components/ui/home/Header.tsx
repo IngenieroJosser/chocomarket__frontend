@@ -14,7 +14,7 @@ import { button } from "framer-motion/client";
 const Header = () => {
   const [language, setLanguage] = useState<string>("es");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [moneyCountry, setMoneyCountry] = useState<string>("cop");
+  // const [moneyCountry, setMoneyCountry] = useState<string>("cop");
   const [scrolled, setScrolled] = useState<boolean | null>(null);
   const { isDark, toggleDarkMode } = useDarkMode();
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -159,7 +159,7 @@ const Header = () => {
             <svg
               onClick={toggleDarkMode}
               className={`icon icon-dark-mode cursor-pointer transition-colors duration-300 ${
-                isDark ? "text-[#008060]" : "text-[rgba(0,0,0,.4)]"
+                isDark ? "text-[#00e7ae]" : "text-[#008060]"
               }`}
               width="24"
               height="24"
@@ -204,7 +204,7 @@ const Header = () => {
 
             <svg
               onClick={toggleCart}
-              className="icon icon-cart cursor-pointer"
+              className="icon icon-cart cursor-pointer text-[#008060]"
               width="22"
               height="23"
               viewBox="0 0 22 23"
@@ -273,7 +273,7 @@ const Header = () => {
               className="icon icon-account"
               width="24"
               height="24"
-              fill="none"
+              fill="#008060"
               viewBox="0 0 22 23"
             >
               <path
@@ -297,7 +297,7 @@ const Header = () => {
               width="24"
               height="24"
               viewBox="0 0 22 23"
-              fill="none"
+              fill="#008060"
             >
               <path
                 d="M17.9437 6.6875H4.05622C3.88705 6.68829 3.72396 6.75067 3.59744 6.86296C3.47091 6.97525 3.3896 7.12978 3.36872 7.29766L2.14841 18.2977C2.13756 18.3935 2.14699 18.4906 2.1761 18.5825C2.20521 18.6745 2.25335 18.7593 2.31738 18.8314C2.38141 18.9035 2.4599 18.9614 2.54776 19.0012C2.63561 19.041 2.73086 19.0619 2.82732 19.0625H19.1726C19.2691 19.0619 19.3643 19.041 19.4522 19.0012C19.54 18.9614 19.6185 18.9035 19.6826 18.8314C19.7466 18.7593 19.7947 18.6745 19.8238 18.5825C19.853 18.4906 19.8624 18.3935 19.8515 18.2977L18.6312 7.29766C18.6103 7.12978 18.529 6.97525 18.4025 6.86296C18.276 6.75067 18.1129 6.68829 17.9437 6.6875Z"
@@ -323,7 +323,7 @@ const Header = () => {
           >
             <svg
               className="w-6 h-6"
-              fill="none"
+              fill="#008060"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
