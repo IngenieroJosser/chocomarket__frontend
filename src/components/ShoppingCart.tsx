@@ -42,8 +42,8 @@ const ShoppingCart = () => {
                   height={200}
                   alt={item.name}
                 />
-                <h3 className="font-semibold uppercase">{item.name}</h3>
-                <p className="text-lg">${item.price.toFixed(2)} COP</p>
+                <h3 className="font-semibold uppercase text-black">{item.name}</h3>
+                <p className="text-lg text-[#008060]">${item.price.toFixed(2)} COP</p>
 
                 {/* Selector de cantidad */}
                 <div className="flex items-center gap-2 mt-2">
@@ -54,16 +54,16 @@ const ShoppingCart = () => {
                         Math.max((item.quantity || 1) - 1, 1)
                       )
                     }
-                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                    className="px-2 py-1 bg-gray-800 hover:bg-gray-600 rounded-2xl"
                   >
                     -
                   </button>
-                  <span>{item.quantity || 1}</span>
+                  <span className="text-emerald-600">{item.quantity || 1}</span>
                   <button
                     onClick={() =>
                       updateQuantity(item.id, (item.quantity || 1) + 1)
                     }
-                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                    className="px-2 py-1 bg-gray-800 hover:bg-gray-600 rounded-2xl"
                   >
                     +
                   </button>
@@ -84,8 +84,8 @@ const ShoppingCart = () => {
       {/* Totales y acciones */}
       <div className="mt-10 space-y-6">
         <div className="flex justify-between items-center text-lg font-semibold">
-          <span>Subtotal:</span>
-          <span>${subtotal.toFixed(2)} COP</span>
+          <span className="text-black">Subtotal:</span>
+          <span className="text-black">${subtotal.toFixed(2)} COP</span>
         </div>
 
         {/* Botones con nuevo estilo y disposición */}

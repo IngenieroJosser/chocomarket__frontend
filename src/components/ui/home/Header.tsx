@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import ShoppingCart from "@/components/ShoppingCart";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/typeDefinition";
+import { button } from "framer-motion/client";
 
 const Header = () => {
   const [language, setLanguage] = useState<string>("es");
@@ -466,7 +467,16 @@ const Header = () => {
             </div>
 
             {cart.length === 0 ? (
-              <p className="text-center text-gray-500">Tu carrito está vacío</p>
+              <div className="flex flex-row-reverse justify-between mt-5">
+                <button 
+                  aria-label="Cerrar modal del carrito de compra"
+                  className="text-[#ff0000] cursor-pointer"
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  X
+                </button>
+                <p className="text-center text-gray-500">Tu carrito está vacío</p>
+              </div>
             ) : (
               <>
                 <ShoppingCart />
