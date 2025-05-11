@@ -22,7 +22,7 @@ export const Select = ({ label, name, value, onChange, options }: SelectProps) =
         name={name}
         value={value}
         onChange={onChange}
-        className="text-emerald-900 border-none text-sm rounded px-3 py-2 focus:outline-none focus:ring-2 "
+        className="text-[#008060] border-none text-sm rounded px-3 py-2 focus:outline-none focus:ring-2 "
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
