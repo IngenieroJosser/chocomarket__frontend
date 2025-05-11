@@ -69,7 +69,7 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                   />
                 </div>
               ) : (
-                <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">
+                <div className="w-full h-48 bg-gray-100 flex items-center justify-cente">
                   Sin imagen disponible
                 </div>
               )}
@@ -77,11 +77,11 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
 
             <div className="p-4 flex-1 flex flex-col justify-between space-y-2">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold">
                   {product.name}
                 </h3>
 
-                <p className="text-gray-600 mt-1 text-sm">
+                <p className="mt-1 text-sm">
                   {product.description}
                 </p>
 
@@ -103,9 +103,9 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                 </p>
               </div>
 
-              <div className="text-xs text-gray-500">
+              <div className="text-xs">
                 <span>Vendido por: </span>
-                <span className="font-medium text-gray-700">
+                <span className="font-medium">
                   {product.user?.email || "Desconocido"}
                 </span>
               </div>
