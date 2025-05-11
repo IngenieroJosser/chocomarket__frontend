@@ -50,21 +50,21 @@ const BannerAside = () => {
   };
 
   return (
-    <aside className="w-64 fixed top-23 left-0 h-[calc(100vh-92px)] bg-[#F9F9F9] p-8 border-r border-gray-200 shadow-sm overflow-y-auto">
+    <aside className="w-64 fixed top-23 left-0 h-[calc(100vh-92px)] p-8 py-20 border-r shadow-sm overflow-y-auto">
       <nav className="space-y-4">
         {menuItems.map((item, index) => (
           <div key={index}>
             <button
               aria-label="Botón para ver información sobre el menú del item"
               onClick={() => toggleTab(index)}
-              className="w-full text-left flex justify-between items-center text-[#005f4a] font-semibold hover:text-[#004a38] transition duration-200"
+              className="w-full text-left flex justify-between items-center font-semibold hover:text-[#eee9e9] transition duration-200"
             >
               <span>{item.title}</span>
               <span className="text-sm transition">
                 {openTab === index ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    fill="#ffffff"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
@@ -102,12 +102,12 @@ const BannerAside = () => {
                   : "max-h-0 opacity-0"
               }`}
             >
-              <ul className="pl-4 text-sm text-[#005f4a80] space-y-2">
+              <ul className="py-4 text-sm space-y-2">
                 {item.children.map((child, i) => (
                   <li key={i}>
                     <Link
                       href={child.path}
-                      className="block cursor-pointer hover:text-[#005f4a] transition"
+                      className="block cursor-pointer hover:transition"
                     >
                       {child.label}
                     </Link>

@@ -43,7 +43,7 @@ export default function SellerDashboard() {
         <div className="lg:hidden flex justify-between items-center p-4 mt-2 md:mt-10">
           <button
             onClick={toggleMenu}
-            className="text-[#005f4a] focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105"
+            className="focus:outline-none transition-transform duration-300 ease-in-out hover:scale-105"
             aria-label="Abrir menú lateral"
           >
             <svg
@@ -64,7 +64,7 @@ export default function SellerDashboard() {
         </div>
 
         {/* Sidebar en modo desktop */}
-        <div className="hidden lg:block w-64 bg-[#F9F9F9] shadow-md h-[calc(100vh-92px)] sticky top-[92px]">
+        <div className="hidden lg:block w-64 shadow-md h-[calc(100vh-92px)] sticky top-[92px]">
           <BannerAside />
         </div>
 
@@ -77,7 +77,7 @@ export default function SellerDashboard() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.5 }}
-              className="fixed left-0 w-64 h-[calc(100vh-98px)] z-50 bg-[#F9F9F9] shadow-md lg:hidden md:top-[120px] top-[92px]"
+              className="fixed left-0 w-64 h-[calc(100vh-98px)] z-50 shadow-md lg:hidden md:top-[120px] top-[92px]"
             >
               <BannerAside />
             </motion.div>
