@@ -6,10 +6,10 @@ import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { CartProduct, Order } from "@/types/typeDefinition";
 import { normalizeImageUrl } from "@/helpers/url";
-import { toast } from "sonner";
 import { createShopInTheCart } from "@/services/products/productService";
 import { useRouter } from "next/navigation";
 import { Spinner } from "./Spinner";
+import { toast, Bounce } from "react-toastify";
 
 const ShoppingCart = () => {
   const router = useRouter();
@@ -19,14 +19,14 @@ const ShoppingCart = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   const handleRemove = (id: number) => {
     removeFromCart(id);
-    toast.success('Producto eliminado del carrito');
+    toast.success("Producto eliminado del carrito");
   };
 
   const subtotal = cart.reduce(
@@ -39,55 +39,31 @@ const ShoppingCart = () => {
   }
 
   const handleCompletePurchase = async () => {
-    setLoading(true);
-
     if (!userId) {
       toast.error('Debes iniciar sesión para completar la compra');
       router.push('/login');
-      setLoading(false);
       return;
     }
 
-    // if (!userId) {
-    //   return (
-    //     <div className="text-center mt-10">
-    //       <p className="text-lg font-semibold text-red-600">
-    //         Debes iniciar sesión para ver tu carrito
-    //       </p>
-    //       <button
-    //         onClick={() => router.push('/login')}
-    //         className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-xl"
-    //       >
-    //         Iniciar Sesión
-    //       </button>
-    //     </div>
-    //   );
-    // }
+    const orderData: Order = {
+      userId,
+      total: subtotal,
+      status: 'PENDING',
+      items: cart.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity || 1,
+      })),
+    };
 
-    try {
-      const orderData: Order = {
-        userId,
-        total: subtotal,
-        status: 'PENDING',
-        items: cart.map((item) => ({
-          productId: item.id,
-          quantity: item.quantity || 1,
-        })),
-      };
+    const response = await createShopInTheCart(orderData);
 
-      const response = await createShopInTheCart(orderData);
-
-      if (response.success) {
-        toast.success('Compra realizada con éxito');
-        clearCart();
-      } else {
-        toast.error('Hubo un error al procesar la compra');
-      }
-    } catch (error: any) {
-      toast.error('Hubo un error en la solicitud');
-      console.error(error);
-    } finally {
-      setLoading(false);
+    if (response?.success) {
+      clearCart();
+      return response;
+    } else {
+      throw new Error(
+        response?.message || 'Hubo un error al procesar la compra'
+      );
     }
   };
 
@@ -154,22 +130,39 @@ const ShoppingCart = () => {
           <span className="text-black">${subtotal.toFixed(2)} COP</span>
         </div>
 
-        {/* Botones con nuevo estilo y disposición */}
         <div className="mt-8 space-y-4">
           <button
             className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold text-base transition-all duration-300 shadow-md 
             ${
               !userId || loading || cart.length === 0
-                ? "bg-green-300 text-gray-400 cursor-not-allowed" // Estilo deshabilitado
-                : "bg-green-600 text-white hover:bg-green-700" // Estilo habilitado
+                ? "bg-green-300 text-gray-400 cursor-not-allowed"
+                : "bg-green-600 text-white hover:bg-green-700"
             }`}
-            onClick={handleCompletePurchase}
             disabled={!userId || loading || cart.length === 0}
+            onClick={async () => {
+              setLoading(true);
+
+              await toast.promise(
+                handleCompletePurchase(),
+                {
+                  pending: "Agregando compra...",
+                  success: "Compra registrada éxitosamente 💚",
+                  error: "Error al realizar la compra ❌",
+                },
+                {
+                  autoClose: 2000,
+                  transition: Bounce,
+                  progress: undefined,
+                  closeOnClick: true,
+                }
+              );
+
+              setLoading(false);
+            }}
           >
             {loading ? <Spinner /> : "🛒 Finalizar compra"}
           </button>
 
-          {/* Botones secundarios en fila */}
           <div className="flex flex-wrap gap-4 justify-between">
             <button
               onClick={toggleCart}

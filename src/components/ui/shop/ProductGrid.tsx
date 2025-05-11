@@ -141,7 +141,6 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                       closeOnClick: true,
                     }
                   );
-                  
                 }}
               >
                 Seleccionar
