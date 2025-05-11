@@ -4,7 +4,9 @@ import {
   CreateProductData, 
   ProductResponse, 
   UpdateProductData, 
-  Product
+  Product,
+  Order,
+  OrderResponse
 } from "@/types/typeDefinition";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '') || 'http://localhost:3001';
@@ -27,4 +29,8 @@ export async function findAllProduct(): Promise<Product[]> {
 
 export async function removeProduct(id: number): Promise<ProductResponse> {
   return await apiRequest<ProductResponse>('DELETE', `${baseUrl}/products/${id}`);
+}
+
+export async function createShopInTheCart(dataCartItem: Order): Promise<OrderResponse> {
+  return await apiRequest<OrderResponse>('POST', `${baseUrl}/cart-shop/`, dataCartItem);
 }

@@ -70,6 +70,7 @@ const LoginPage = () => {
       localStorage.setItem("userRole", response.user.role);
       localStorage.setItem("userName", response.user.name);
       toast.success(`Hola, ${response.user.name || "Usuario"}`);
+      localStorage.setItem("user", JSON.stringify(response.user));
 
       const userRole = response.user.role.toUpperCase();
       switch (userRole) {

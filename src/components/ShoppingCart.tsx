@@ -1,23 +1,32 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-import { CartProduct } from "@/types/typeDefinition";
+import { useUser } from "@/context/UserContext";
+import { CartProduct, Order } from "@/types/typeDefinition";
 import { normalizeImageUrl } from "@/helpers/url";
 import { toast } from "sonner";
+import { createShopInTheCart } from "@/services/products/productService";
+import { useRouter } from "next/navigation";
+import { Spinner } from "./Spinner";
 
 const ShoppingCart = () => {
+  const router = useRouter();
   const [isCartOpen, setIsCartOpen] = useState<boolean>(true);
   const { cart, removeFromCart, clearCart, updateQuantity } = useCart();
+  const { id: userId } = useUser();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   const handleRemove = (id: number) => {
     removeFromCart(id);
-    toast.success("Producto eliminado del carrito");
+    toast.success('Producto eliminado del carrito');
   };
 
   const subtotal = cart.reduce(
@@ -28,6 +37,59 @@ const ShoppingCart = () => {
   if (cart.length === 0) {
     return <p>Tu carrito está vacío</p>;
   }
+
+  const handleCompletePurchase = async () => {
+    setLoading(true);
+
+    if (!userId) {
+      toast.error('Debes iniciar sesión para completar la compra');
+      router.push('/login');
+      setLoading(false);
+      return;
+    }
+
+    // if (!userId) {
+    //   return (
+    //     <div className="text-center mt-10">
+    //       <p className="text-lg font-semibold text-red-600">
+    //         Debes iniciar sesión para ver tu carrito
+    //       </p>
+    //       <button
+    //         onClick={() => router.push('/login')}
+    //         className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-xl"
+    //       >
+    //         Iniciar Sesión
+    //       </button>
+    //     </div>
+    //   );
+    // }
+
+    try {
+      const orderData: Order = {
+        userId,
+        total: subtotal,
+        status: 'PENDING',
+        items: cart.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity || 1,
+        })),
+      };
+
+      const response = await createShopInTheCart(orderData);
+
+      if (response.success) {
+        toast.success('Compra realizada con éxito');
+        clearCart();
+      } else {
+        toast.error('Hubo un error al procesar la compra');
+      }
+    } catch (error: any) {
+      toast.error('Hubo un error en la solicitud');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -42,8 +104,12 @@ const ShoppingCart = () => {
                   height={200}
                   alt={item.name}
                 />
-                <h3 className="font-semibold uppercase text-black">{item.name}</h3>
-                <p className="text-lg text-[#008060]">${item.price.toFixed(2)} COP</p>
+                <h3 className="font-semibold uppercase text-black">
+                  {item.name}
+                </h3>
+                <p className="text-lg text-[#008060]">
+                  ${item.price.toFixed(2)} COP
+                </p>
 
                 {/* Selector de cantidad */}
                 <div className="flex items-center gap-2 mt-2">
@@ -90,12 +156,17 @@ const ShoppingCart = () => {
 
         {/* Botones con nuevo estilo y disposición */}
         <div className="mt-8 space-y-4">
-          {/* Botón principal centrado */}
           <button
-            className="w-full cursor-pointer bg-green-600 text-white py-3 px-6 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-green-700 shadow-md"
-            onClick={() => toast.info("Proceso de compra aún no implementado")}
+            className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold text-base transition-all duration-300 shadow-md 
+            ${
+              !userId || loading || cart.length === 0
+                ? "bg-green-300 text-gray-400 cursor-not-allowed" // Estilo deshabilitado
+                : "bg-green-600 text-white hover:bg-green-700" // Estilo habilitado
+            }`}
+            onClick={handleCompletePurchase}
+            disabled={!userId || loading || cart.length === 0}
           >
-            🛒 Finalizar Compra
+            {loading ? <Spinner /> : "🛒 Finalizar compra"}
           </button>
 
           {/* Botones secundarios en fila */}

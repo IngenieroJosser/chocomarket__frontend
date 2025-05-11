@@ -121,6 +121,12 @@ export interface ProductResponse {
   product: Product;
 }
 
+export interface OrderResponse {
+  success: boolean;
+  message: string;
+  orderId: number;
+}
+
 export interface ProductListResponse {
   message: string;
   products: Product[];
@@ -137,4 +143,20 @@ export interface User {
   googleId?: string;
   oauthProvider?: string;
   role?: 'SELLER' | 'ADMIN' | 'BUYER';
+}
+
+export interface IOrderItem {
+  productId: number;
+  quantity: number;
+  price: number;
+}
+
+export interface Order {
+  userId: number;
+  total: number;
+  status: string;
+  items: {
+    productId: number;
+    quantity: number;
+  }[];
 }
