@@ -131,11 +131,11 @@ const ProductGrid = ({ products = [] }: ProductGridProps) => {
                     }),
                     {
                       pending: "Agregando al carrito...",
-                      success: "Producto agregado con éxito 💚",
+                      success: `Wujuuuuu!!💚`,
                       error: "Error al agregar el producto ❌",
                     },
                     {
-                      autoClose: 2000,
+                      autoClose: 3000,
                       transition: Bounce,
                       progress: undefined,
                       closeOnClick: true,
