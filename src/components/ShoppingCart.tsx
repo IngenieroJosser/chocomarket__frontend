@@ -58,7 +58,7 @@ const ShoppingCart = () => {
     const response = await createShopInTheCart(orderData);
 
     if (response?.success) {
-      clearCart();
+      router.push(`/checkout/${response.orderId}`); // Redirige al checkout
       return response;
     } else {
       throw new Error(

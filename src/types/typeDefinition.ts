@@ -160,3 +160,17 @@ export interface Order {
     quantity: number;
   }[];
 }
+
+export interface PaymentData {
+  amount: number;
+  method: string;
+  userId: string;
+  // otros campos necesarios
+}
+
+export interface PaymentResponse {
+  success: boolean;
+  paymentId: string;
+  message?: string;
+  paymentUrl?: string;
+}
