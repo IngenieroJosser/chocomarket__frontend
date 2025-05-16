@@ -1,14 +1,26 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const imagesPresentation = [
-  { src: '/presentation-img1.webp', alt: 'Aventura en la naturaleza', title: 'Naturaleza Viva' },
-  { src: '/presentation-img4.webp', alt: 'Tour cultural', title: 'Cultura y Tradición' },
-  { src: '/presentation-img6.webp', alt: 'Rutas mágicas', title: 'Rutas Mágicas' },
-  { src: '/presentation-img5.webp', alt: 'Joss Vibes', title: 'Joss Vibes' },
+  {
+    src: "/presentation-img1.webp",
+    alt: "Aventura en la naturaleza",
+    title: "Naturaleza Viva",
+  },
+  {
+    src: "/presentation-img4.webp",
+    alt: "Tour cultural",
+    title: "Cultura y Tradición",
+  },
+  {
+    src: "/presentation-img6.webp",
+    alt: "Rutas mágicas",
+    title: "Rutas Mágicas",
+  },
+  { src: "/presentation-img5.webp", alt: "Joss Vibes", title: "Joss Vibes" },
 ];
 
 const Presentation = () => {
@@ -32,8 +44,9 @@ const Presentation = () => {
           src={src}
           alt={alt}
           fill
-          priority
-          sizes="100vw"
+          priority={activeIndex === 0} // Solo precarga la primera imagen
+          quality={75} // Reduce peso sin perder calidad visual
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           className="object-cover transition-opacity duration-700 ease-in-out"
         />
 
@@ -43,7 +56,7 @@ const Presentation = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in">
               {title}
             </h2>
-            <Link 
+            <Link
               href="/shop"
               className="bg-white text-black px-6 py-2 rounded-full 
                        hover:font-bold bg-opacity-90 transition-all duration-300
@@ -63,7 +76,7 @@ const Presentation = () => {
             onClick={() => setActiveIndex(index)}
             aria-label={`Slide ${index + 1}`}
             className={`h-2 w-8 rounded-full transition-all ${
-              index === activeIndex ? 'bg-white' : 'bg-white/50'
+              index === activeIndex ? "bg-white" : "bg-white/50"
             }`}
           />
         ))}
@@ -73,14 +86,21 @@ const Presentation = () => {
       <button
         aria-label="Anterior"
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 p-2 rounded-full hover:bg-white/50 transition-all md:p-3"
-        onClick={() => setActiveIndex((prev) => (prev - 1 + imagesPresentation.length) % imagesPresentation.length)}
+        onClick={() =>
+          setActiveIndex(
+            (prev) =>
+              (prev - 1 + imagesPresentation.length) % imagesPresentation.length
+          )
+        }
       >
         ←
       </button>
       <button
         aria-label="Siguiente"
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 p-2 rounded-full hover:bg-white/50 transition-all md:p-3"
-        onClick={() => setActiveIndex((prev) => (prev + 1) % imagesPresentation.length)}
+        onClick={() =>
+          setActiveIndex((prev) => (prev + 1) % imagesPresentation.length)
+        }
       >
         →
       </button>
