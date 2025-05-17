@@ -173,4 +173,26 @@ export interface PaymentResponse {
   paymentId: string;
   message?: string;
   paymentUrl?: string;
+  formData?: Record<string, string>;
 }
+
+export interface PaymentRequestDTO {
+  orderId: number;
+  amount: number;
+  method: string;
+  email: string;
+}
+
+export type OrderItem = {
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+export type OrderDetails = {
+  orderId: number;
+  items: OrderItem[];
+  createdAt?: string;
+  updatedAt?: string;
+};
